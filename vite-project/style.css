@@ -1,0 +1,49 @@
+body {
+  background-color: aliceblue;
+  scroll-behavior: smooth;
+}
+
+/* Header and Navigation */
+
+/* Search bar */
+/* Favourites */
+/* sort by dropdown menu */
+
+/* Main content */
+.podcast-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 3rem;
+  padding: 4rem 2rem;
+}
+
+.podcast-item {
+  background-color: #ebebeb;
+  padding: 2rem;
+  border: 0.2rem solid black;
+}
+
+.podcast-item:hover {
+}
+
+.podcast-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.podcast-image {
+  width: 10rem;
+  height: 15rem;
+}
+
+.podcast-content-container {
+  text-align: center;
+}
+
+.favourites-star {
+  width: 2.5rem;
+  height: 2.5rem;
+}
