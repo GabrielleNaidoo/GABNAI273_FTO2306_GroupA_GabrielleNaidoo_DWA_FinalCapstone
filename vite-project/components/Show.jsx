@@ -20,10 +20,11 @@ function Show() {
       .catch((err) => console.log(err));
   }, [currentId]);
 
-  console.log(showData);
+  // console.log(showData);
   const seasonDetails =
     showData.seasons &&
     showData.seasons.map((season) => {
+      console.log(season.episodes);
       return (
         <div key={season.season}>
           <h1>{season.title}</h1>
@@ -33,6 +34,7 @@ function Show() {
             style={{ width: "6rem", height: "10rem" }}
           ></img>
           <p>Episodes: {season.episodes.length}</p>
+          <Link to={`/episode`}>View Episodes</Link>
         </div>
       );
     });
