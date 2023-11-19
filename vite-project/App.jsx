@@ -19,6 +19,8 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  // console.log(podcastDataAll);
+
   const podcastElement = podcastDataAll.map((element) => {
     return (
       <div key={element.id}>
