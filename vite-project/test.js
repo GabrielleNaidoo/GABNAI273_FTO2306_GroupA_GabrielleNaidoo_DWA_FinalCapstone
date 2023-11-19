@@ -7,3 +7,7 @@ function Test(){
 }
 
 Test();
+
+//https://podcast-api.netlify.app/id/10716
+
+//https://podcast-api.netlify.app/shows

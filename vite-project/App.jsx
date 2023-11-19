@@ -1,28 +1,41 @@
 import { useState, useEffect } from "react";
-import Header from "./components/Header";
-import Podcast from "./components/Podcast";
+import { Link, Route, Routes } from "react-router-dom";
+import Preview from "/components/Preview";
+import Navigation from "/components/Navigation";
+import Show from "/components/Show";
 
 function App() {
-  const [podcastData, setPodcastData] = useState([]);
-  const [star, setStar] = useState({ "": true });
+  const [podcastDataAll, setPodcastDataAll] = useState([]);
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
-      .then((res) => res.json())
-      .then((data) => {
-        setPodcastData([...data]);
-      });
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Country not found ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setPodcastDataAll([...data]))
+      .catch((err) => console.log(err));
   }, []);
 
-  const podcastElements = podcastData.map((element) => (
-    <Podcast podcastData={element} key={element.id} star={star} />
-  ));
+  const podcastElement = podcastDataAll.map((element) => {
+    return (
+      <div key={element.id}>
+        <Preview podcastData={element} />
+        <Link to={`/show/${element.id}`}>See details</Link>
+      </div>
+    );
+  });
 
   return (
-    <div>
-      <Header />
-      <div className="podcast-container">{podcastElements}</div>
-    </div>
+    <>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={podcastElement} />
+        <Route path="/show/:id" element={<Show />} />
+      </Routes>
+    </>
   );
 }
 
