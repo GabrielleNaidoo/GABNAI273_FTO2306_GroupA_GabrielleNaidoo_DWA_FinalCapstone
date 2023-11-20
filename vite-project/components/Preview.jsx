@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Preview(props) {
   const genreTitle = {
@@ -24,11 +25,11 @@ function Preview(props) {
       <li
         key={genre}
         style={{
-          backgroundColor: "#C0C0C0",
+          backgroundColor: "#F8F8F8",
           marginBottom: "1rem",
           display: "inline-block",
           listStyle: "none",
-          padding: "0.05rem",
+          padding: "0.25rem 0.5rem",
         }}
       >
         <div className="genre-list-item-text-container">
@@ -56,6 +57,7 @@ function Preview(props) {
       <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
       <h4>Last Updated: {lastUpdated}</h4>
       <h4>favourites star image</h4>
+      <Link to={`/show/${props.podcastData.id}`}>See details</Link>
     </div>
   );
 }

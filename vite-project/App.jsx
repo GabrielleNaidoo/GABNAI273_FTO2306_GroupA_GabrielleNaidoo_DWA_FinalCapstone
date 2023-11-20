@@ -27,7 +27,6 @@ function App() {
     return (
       <div key={element.id}>
         <Preview podcastData={element} />
-        <Link to={`/show/${element.id}`}>See details</Link>
       </div>
     );
   });
