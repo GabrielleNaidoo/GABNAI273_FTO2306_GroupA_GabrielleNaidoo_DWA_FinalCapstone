@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 function Show() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [currentId, setCurrentId] = useState(id);
   const [showData, setShowData] = useState({});
 
@@ -20,11 +21,20 @@ function Show() {
       .catch((err) => console.log(err));
   }, [currentId]);
 
-  // console.log(showData);
+  const handleSeasonButtonClick = (season) => {
+    navigate(`/show/${id}/season/${season.season}`, {
+      state: { episodes: season.episodes, seasonImage: season.image },
+    });
+  };
+  function handleClickBack() {
+    navigate(-1);
+  }
+
+  console.log(showData);
   const seasonDetails =
     showData.seasons &&
     showData.seasons.map((season) => {
-      console.log(season.episodes);
+      // console.log(season.episodes);
       return (
         <div key={season.season}>
           <h1>{season.title}</h1>
@@ -34,13 +44,16 @@ function Show() {
             style={{ width: "6rem", height: "10rem" }}
           ></img>
           <p>Episodes: {season.episodes.length}</p>
-          <Link to={`/episode`}>View Episodes</Link>
+          <button onClick={() => handleSeasonButtonClick(season)}>
+            SEE EPISODES
+          </button>
         </div>
       );
     });
 
   return (
     <div className="show">
+      <button onClick={handleClickBack}>Back</button>
       <h1>{showData.title}</h1>
       <img
         className="show-cover-image"

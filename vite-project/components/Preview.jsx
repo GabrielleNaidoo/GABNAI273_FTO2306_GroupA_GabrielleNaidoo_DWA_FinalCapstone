@@ -36,7 +36,7 @@ function Preview(props) {
         <h3>Genres:</h3>
         <ul className="preview-genres">{genreMap}</ul>
       </div>
-      <h4 className="preview-seasons">Seasons:{props.podcastData.seasons}</h4>
+      <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
       <h4>Last Updated: {lastUpdated}</h4>
       <h4>favourites star image</h4>
     </div>

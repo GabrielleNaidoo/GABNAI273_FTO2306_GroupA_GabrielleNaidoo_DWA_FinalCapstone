@@ -3,7 +3,8 @@ import { Link, Route, Routes } from "react-router-dom";
 import Preview from "/components/Preview";
 import Navigation from "/components/Navigation";
 import Show from "/components/Show";
-import Episode from "/components/Episode";
+import Episodes from "/components/Episodes";
+import Favourites from "/components/Favourites";
 
 function App() {
   const [podcastDataAll, setPodcastDataAll] = useState([]);
@@ -37,7 +38,8 @@ function App() {
       <Routes>
         <Route path="/" element={podcastElement} />
         <Route path="/show/:id" element={<Show />} />
-        <Route path="/episode" element={<Episode />} />
+        <Route path="/show/:id/season/:seasonNumber" element={<Episodes />} />
+        <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </>
   );
