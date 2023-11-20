@@ -20,21 +20,38 @@ function Preview(props) {
   }/${date.getDate()}`;
 
   const genreMap = props.podcastData.genres.map((genre) => {
-    return <li key={genre}>{genreTitle[genre]}</li>;
+    return (
+      <li
+        key={genre}
+        style={{
+          backgroundColor: "#C0C0C0",
+          marginBottom: "1rem",
+          display: "inline-block",
+          listStyle: "none",
+          padding: "0.05rem",
+        }}
+      >
+        <div className="genre-list-item-text-container">
+          {genreTitle[genre]}
+        </div>
+      </li>
+    );
   });
 
   return (
     <div className="preview">
-      <h1>{props.podcastData.title}</h1>
-      <img
-        className="preview-cover-image"
-        src={props.podcastData.image}
-        alt="cover image"
-        style={{ height: "12rem", width: "6rem" }}
-      ></img>
+      <p className="preview-title">{props.podcastData.title}</p>
+      <div className="preview-cover-image-container">
+        <img
+          className="preview-cover-image"
+          src={props.podcastData.image}
+          alt="cover image"
+        ></img>
+      </div>
       <div>
-        <h3>Genres:</h3>
-        <ul className="preview-genres">{genreMap}</ul>
+        <ul className="preview-genres" style={{ display: "flex", gap: "1rem" }}>
+          {genreMap}
+        </ul>
       </div>
       <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
       <h4>Last Updated: {lastUpdated}</h4>

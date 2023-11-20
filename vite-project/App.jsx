@@ -36,7 +36,10 @@ function App() {
     <>
       <Navigation />
       <Routes>
-        <Route path="/" element={podcastElement} />
+        <Route
+          path="/"
+          element={<div className="previews-container">{podcastElement}</div>}
+        />
         <Route path="/show/:id" element={<Show />} />
         <Route path="/show/:id/season/:seasonNumber" element={<Episodes />} />
         <Route path="/favourites" element={<Favourites />} />

@@ -32,7 +32,7 @@ function Episodes() {
     <div>
       <button onClick={handleClickBack}>Back to show</button>
       <h1>EPISODES</h1>
-      <div>{episodeItems || "Loading..."}</div>
+      <div>{episodeItems || "No episodes available"}</div>
     </div>
   );
 }
