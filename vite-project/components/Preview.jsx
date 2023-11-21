@@ -16,9 +16,11 @@ function Preview(props) {
   };
 
   const date = new Date(props.podcastData.updated);
-  const lastUpdated = `${date.getFullYear()}/${
-    date.getMonth() + 1
-  }/${date.getDate()}`;
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  const lastUpdated = `${day}/${month}/${year}`;
 
   const genreMap = props.podcastData.genres.map((genre) => {
     return (

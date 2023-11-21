@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Preview from "/components/Preview";
-import Navigation from "/components/Navigation";
 import Show from "/components/Show";
 import Episodes from "/components/Episodes";
 import Favourites from "/components/Favourites";
+import Dropdown from "/components/Dropdown";
 
 function App() {
-  const [podcastDataAll, setPodcastDataAll] = useState([]);
+  const [podcastData, setPodcastData] = useState([]);
+  const [formData, setFormData] = useState({ selectedValue: "all" });
+
+  function handleChange(event) {
+    const { value } = event.target;
+    setFormData({ selectedValue: value });
+  }
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
@@ -17,13 +23,40 @@ function App() {
         }
         return res.json();
       })
-      .then((data) => setPodcastDataAll([...data]))
+      .then((data) => {
+        // conditionals based on filtering for podcastData
+        if (formData.selectedValue === "alphabetical") {
+          const alphabeticalPodcastData = [...podcastData].sort((a, b) =>
+            a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+          );
+          setPodcastData([...alphabeticalPodcastData]);
+        } else if (formData.selectedValue === "reverse-alphabetical") {
+          const reverseAlphabeticalPodcastData = [...podcastData].sort((a, b) =>
+            b.title.toLowerCase().localeCompare(a.title.toLowerCase())
+          );
+          setPodcastData([...reverseAlphabeticalPodcastData]);
+        } else if (formData.selectedValue === "newest-to-oldest") {
+          const newestToOldestPodcastData = [...podcastData].sort((a, b) => {
+            const aDate = new Date(a.updated) || 0;
+            const bDate = new Date(b.updated) || 0;
+            return bDate - aDate;
+          });
+          setPodcastData([...newestToOldestPodcastData]);
+        } else if (formData.selectedValue === "oldest-to-newest") {
+          const oldestToNewestPodcastData = [...podcastData].sort((a, b) => {
+            const aDate = new Date(a.updated) || 0;
+            const bDate = new Date(b.updated) || 0;
+            return aDate - bDate;
+          });
+          setPodcastData([...oldestToNewestPodcastData]);
+        } else {
+          setPodcastData([...data]);
+        }
+      })
       .catch((err) => console.log(err));
-  }, []);
+  }, [formData.selectedValue, podcastData]);
 
-  // console.log(podcastDataAll);
-
-  const podcastElement = podcastDataAll.map((element) => {
+  const podcastElement = podcastData.map((element) => {
     return (
       <div key={element.id}>
         <Preview podcastData={element} />
@@ -33,7 +66,16 @@ function App() {
 
   return (
     <>
-      <Navigation />
+      <nav>
+        <h1>PodPortal</h1>
+        <Link to="/">
+          <h1>All podcasts</h1>
+        </Link>
+        <Link to="/favourites">
+          <h1>Favourites</h1>
+        </Link>
+        <Dropdown data={formData} changeHandler={handleChange} />
+      </nav>
       <Routes>
         <Route
           path="/"

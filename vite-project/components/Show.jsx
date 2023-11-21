@@ -21,16 +21,16 @@ function Show() {
       .catch((err) => console.log(err));
   }, [currentId]);
 
-  const handleSeasonButtonClick = (season) => {
+  function handleSeasonButtonClick(season) {
     navigate(`/show/${id}/season/${season.season}`, {
       state: { episodes: season.episodes, seasonImage: season.image },
     });
-  };
+  }
+
   function handleClickBack() {
     navigate(-1);
   }
 
-  console.log(showData);
   const seasonDetails =
     showData.seasons &&
     showData.seasons.map((season) => {
