@@ -5,10 +5,19 @@ body {
 }
 
 /* Header and Navigation */
+.navbar {
+  height: 8rem;
+  background-color: darkgray;
+}
 
 /* Search bar */
 /* Favourites */
 /* sort by dropdown menu */
+/*genre sorting*/
+.genre-title {
+  text-align: center;
+  padding: 2rem 0;
+}
 
 /* Main content */
 .previews-container {
