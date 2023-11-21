@@ -53,7 +53,7 @@ function Show() {
 
   return (
     <div className="show">
-      <button onClick={handleClickBack}>Back</button>
+      <button onClick={handleClickBack}>Back to List</button>
       <h1>{showData.title}</h1>
       <img
         className="show-cover-image"

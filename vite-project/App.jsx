@@ -1,14 +1,23 @@
 import { useState, useEffect } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import Preview from "/components/Preview";
 import Show from "/components/Show";
 import Episodes from "/components/Episodes";
 import Favourites from "/components/Favourites";
 import Dropdown from "/components/Dropdown";
+import GenreSorted from "/components/GenreSorted";
 
 function App() {
   const [podcastData, setPodcastData] = useState([]);
   const [formData, setFormData] = useState({ selectedValue: "all" });
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function handleChange(event) {
     const { value } = event.target;
@@ -64,17 +73,21 @@ function App() {
     );
   });
 
+  const isFavouritesPage = location.pathname === "/favourites";
+
   return (
     <>
-      <nav>
+      <nav style={{ display: "flex", justifyContent: "space-between" }}>
         <h1>PodPortal</h1>
         <Link to="/">
-          <h1>All podcasts</h1>
+          <h1>Podcasts</h1>
         </Link>
         <Link to="/favourites">
           <h1>Favourites</h1>
         </Link>
-        <Dropdown data={formData} changeHandler={handleChange} />
+        {!isFavouritesPage && (
+          <Dropdown data={formData} changeHandler={handleChange} />
+        )}
       </nav>
       <Routes>
         <Route
