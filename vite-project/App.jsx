@@ -6,17 +6,18 @@ import Episodes from "/components/Episodes";
 import Favourites from "/components/Favourites";
 import Dropdown from "/components/Dropdown";
 import GenreDropdown from "/components/GenreDropdown";
+import SearchBox from "/components/SearchBox";
 
 function App() {
   const [podcastData, setPodcastData] = useState([]);
   const [formData, setFormData] = useState({
-    selectedValueFilter: "all",
+    selectedValueFilter: "alphabetical",
     selectedGenreFilter: "all",
+    titleInput: "",
   });
 
   function handleChange(event) {
     const { value, name } = event.target;
-    // setFormData({ selectedValueFilter: value });
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
@@ -36,14 +37,26 @@ function App() {
       };
 
       const selectedGenreFilter = formData.selectedGenreFilter;
-      const filteredArray =
+      const filteredByGenreArray =
         selectedGenreFilter !== "all"
           ? array.filter((podcast) =>
               podcast.genres.includes(genreFilters[selectedGenreFilter])
             )
           : array;
 
-      setPodcastData([...filteredArray]);
+      return filteredByGenreArray;
+    }
+
+    function handleTitleInput(array) {
+      const inputValue = formData.titleInput.toLowerCase();
+      const filteredByTitleArray =
+        inputValue !== ""
+          ? array.filter((podcast) =>
+              podcast.title.toLowerCase().includes(inputValue)
+            )
+          : array;
+
+      return filteredByTitleArray;
     }
 
     fetch("https://podcast-api.netlify.app/shows")
@@ -54,42 +67,47 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        // conditionals based on filtering for podcastData
-        if (formData.selectedValueFilter === "alphabetical") {
-          const alphabeticalPodcastData = [...podcastData].sort((a, b) =>
-            a.title.toLowerCase().localeCompare(b.title.toLowerCase())
-          );
-          setPodcastData(alphabeticalPodcastData);
-          handleGenreSelect(alphabeticalPodcastData);
-        } else if (formData.selectedValueFilter === "reverse-alphabetical") {
-          const reverseAlphabeticalPodcastData = [...podcastData].sort((a, b) =>
+        if (formData.selectedValueFilter === "reverse-alphabetical") {
+          const reverseAlphabeticalPodcastData = [...data].sort((a, b) =>
             b.title.toLowerCase().localeCompare(a.title.toLowerCase())
           );
-          setPodcastData(reverseAlphabeticalPodcastData);
-          handleGenreSelect(reverseAlphabeticalPodcastData);
+          setPodcastData(
+            handleGenreSelect(handleTitleInput(reverseAlphabeticalPodcastData))
+          );
         } else if (formData.selectedValueFilter === "newest-to-oldest") {
-          const newestToOldestPodcastData = [...podcastData].sort((a, b) => {
+          const newestToOldestPodcastData = [...data].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return bDate - aDate;
           });
-          setPodcastData(newestToOldestPodcastData);
-          handleGenreSelect(newestToOldestPodcastData);
+          setPodcastData(
+            handleGenreSelect(handleTitleInput(newestToOldestPodcastData))
+          );
         } else if (formData.selectedValueFilter === "oldest-to-newest") {
-          const oldestToNewestPodcastData = [...podcastData].sort((a, b) => {
+          const oldestToNewestPodcastData = [...data].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return aDate - bDate;
           });
-          setPodcastData(oldestToNewestPodcastData);
-          handleGenreSelect(oldestToNewestPodcastData);
+          setPodcastData(
+            handleGenreSelect(handleTitleInput(oldestToNewestPodcastData))
+          );
         } else {
-          setPodcastData([...data]);
-          handleGenreSelect(data);
+          const alphabeticalPodcastData = [...data].sort((a, b) =>
+            a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+          );
+          setPodcastData(
+            handleGenreSelect(handleTitleInput(alphabeticalPodcastData))
+          );
         }
       })
       .catch((err) => console.log(err));
-  }, [formData.selectedValueFilter, formData.selectedGenreFilter, podcastData]);
+  }, [
+    formData.selectedValueFilter,
+    formData.selectedGenreFilter,
+    formData.titleInput,
+    podcastData,
+  ]);
 
   const podcastElement = podcastData.map((element) => {
     return (
@@ -123,13 +141,15 @@ function App() {
 
       <div className="filter-bar">
         <div>
-          <h2>Title input</h2>
-        </div>
-        <div>
-          <Dropdown data={formData} changeHandler={handleChange} />
+          <h2>
+            <SearchBox data={formData} changeHandler={handleChange} />
+          </h2>
         </div>
         <div>
           <GenreDropdown data={formData} changeHandler={handleChange} />
+        </div>
+        <div>
+          <Dropdown data={formData} changeHandler={handleChange} />
         </div>
       </div>
       <Routes>

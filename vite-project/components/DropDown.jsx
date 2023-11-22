@@ -19,7 +19,6 @@ function Dropdown(props) {
           textAlign: "center",
         }}
       >
-        <option value="all">All</option>
         <option value="alphabetical">A-Z</option>
         <option value="reverse-alphabetical">Z-A</option>
         <option value="newest-to-oldest">Newest to oldest</option>
