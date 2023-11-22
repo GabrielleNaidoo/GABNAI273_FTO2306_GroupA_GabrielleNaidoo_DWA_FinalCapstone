@@ -101,29 +101,42 @@ function App() {
 
   return (
     <>
-      <nav
-        className="navbar"
-        style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 2fr" }}
-      >
-        <h1 style={{ gridColumn: "1/3" }}>PodPortal</h1>
-        <NavLink to="/" style={{ gridColumn: "3/4" }}>
-          <h1>All Podcasts</h1>
-        </NavLink>
-        <NavLink to="/favourites" style={{ gridColumn: "4/5" }}>
-          <h1>Favourites</h1>
-        </NavLink>
-      </nav>
+      <header>
+        <h1 className="name">PodPortal</h1>
+        <div
+          className="nav-links"
+          style={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+            gap: "4rem",
+          }}
+        >
+          <NavLink to="/">
+            <h1>All Podcasts</h1>
+          </NavLink>
+          <NavLink to="/favourites">
+            <h1>Favourites</h1>
+          </NavLink>
+        </div>
+      </header>
+
+      <div className="filter-bar">
+        <div>
+          <h2>Title input</h2>
+        </div>
+        <div>
+          <Dropdown data={formData} changeHandler={handleChange} />
+        </div>
+        <div>
+          <GenreDropdown data={formData} changeHandler={handleChange} />
+        </div>
+      </div>
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <div>
-                <Dropdown data={formData} changeHandler={handleChange} />
-              </div>
-              <div>
-                <GenreDropdown data={formData} changeHandler={handleChange} />
-              </div>
               <div className="previews-container">{podcastElement}</div>
             </>
           }

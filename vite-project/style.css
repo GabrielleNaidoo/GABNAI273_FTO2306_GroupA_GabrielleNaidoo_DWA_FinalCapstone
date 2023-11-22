@@ -4,13 +4,23 @@ body {
   position: relative;
 }
 
-/* Header and Navigation */
-.navbar {
-  height: 8rem;
-  background-color: darkgray;
+/* Header */
+header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
 }
 
-/* Search bar */
+/* filter-bar */
+.filter-bar {
+  height: 4rem;
+  background-color: rgb(226, 73, 73);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* gap: 6rem; */
+}
+
 /* Favourites */
 /* sort by dropdown menu */
 /*genre sorting*/
