@@ -20,60 +20,32 @@ function App() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  // function handleGenreSelect(podcastData) {
-  //   if (formData.selectedGenreFilter === "personalGrowth") {
-  //     const personalGrowthArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(1);
-  //     });
-  //     setPodcastData([...personalGrowthArray]);
-  //   } else if (
-  //     formData.selectedGenreFilter === "trueCrimeAndInvestigativeJournalism"
-  //   ) {
-  //     const trueCrimeAndInvestigativeJournalismArray = [...podcastData].filter(
-  //       (podcast) => {
-  //         return podcast.genres.includes(2);
-  //       }
-  //     );
-  //     setPodcastData([...trueCrimeAndInvestigativeJournalismArray]);
-  //   } else if (formData.selectedGenreFilter === "history") {
-  //     const historyArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(3);
-  //     });
-  //     setPodcastData([...historyArray]);
-  //   } else if (formData.selectedGenreFilter === "comedy") {
-  //     const comedyArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(4);
-  //     });
-  //     setPodcastData([...comedyArray]);
-  //   } else if (formData.selectedGenreFilter === "entertainment") {
-  //     const entertainmentArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(5);
-  //     });
-  //     setPodcastData([...entertainmentArray]);
-  //   } else if (formData.selectedGenreFilter === "business") {
-  //     const businessArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(6);
-  //     });
-  //     setPodcastData([...businessArray]);
-  //   } else if (formData.selectedGenreFilter === "fiction") {
-  //     const fictionArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(7);
-  //     });
-  //     setPodcastData([...fictionArray]);
-  //   } else if (formData.selectedGenreFilter === "news") {
-  //     const newsArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(8);
-  //     });
-  //     setPodcastData([...newsArray]);
-  //   } else if (formData.selectedGenreFilter === "kidsAndFamily") {
-  //     const kidsAndFamilyArray = [...podcastData].filter((podcast) => {
-  //       return podcast.genres.includes(9);
-  //     });
-  //     setPodcastData([...kidsAndFamilyArray]);
-  //   }
-  // }
-
   useEffect(() => {
+    function handleGenreSelect(array) {
+      const genreFilters = {
+        all: 0,
+        personalGrowth: 1,
+        trueCrimeAndInvestigativeJournalism: 2,
+        history: 3,
+        comedy: 4,
+        entertainment: 5,
+        business: 6,
+        fiction: 7,
+        news: 8,
+        kidsAndFamily: 9,
+      };
+
+      const selectedGenreFilter = formData.selectedGenreFilter;
+      const filteredArray =
+        selectedGenreFilter !== "all"
+          ? array.filter((podcast) =>
+              podcast.genres.includes(genreFilters[selectedGenreFilter])
+            )
+          : array;
+
+      setPodcastData([...filteredArray]);
+    }
+
     fetch("https://podcast-api.netlify.app/shows")
       .then((res) => {
         if (!res.ok) {
@@ -87,32 +59,37 @@ function App() {
           const alphabeticalPodcastData = [...podcastData].sort((a, b) =>
             a.title.toLowerCase().localeCompare(b.title.toLowerCase())
           );
-          setPodcastData([...alphabeticalPodcastData]);
+          setPodcastData(alphabeticalPodcastData);
+          handleGenreSelect(alphabeticalPodcastData);
         } else if (formData.selectedValueFilter === "reverse-alphabetical") {
           const reverseAlphabeticalPodcastData = [...podcastData].sort((a, b) =>
             b.title.toLowerCase().localeCompare(a.title.toLowerCase())
           );
-          setPodcastData([...reverseAlphabeticalPodcastData]);
+          setPodcastData(reverseAlphabeticalPodcastData);
+          handleGenreSelect(reverseAlphabeticalPodcastData);
         } else if (formData.selectedValueFilter === "newest-to-oldest") {
           const newestToOldestPodcastData = [...podcastData].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return bDate - aDate;
           });
-          setPodcastData([...newestToOldestPodcastData]);
+          setPodcastData(newestToOldestPodcastData);
+          handleGenreSelect(newestToOldestPodcastData);
         } else if (formData.selectedValueFilter === "oldest-to-newest") {
           const oldestToNewestPodcastData = [...podcastData].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return aDate - bDate;
           });
-          setPodcastData([...oldestToNewestPodcastData]);
+          setPodcastData(oldestToNewestPodcastData);
+          handleGenreSelect(oldestToNewestPodcastData);
         } else {
           setPodcastData([...data]);
+          handleGenreSelect(data);
         }
       })
       .catch((err) => console.log(err));
-  }, [formData.selectedValueFilter, podcastData]);
+  }, [formData.selectedValueFilter, formData.selectedGenreFilter, podcastData]);
 
   const podcastElement = podcastData.map((element) => {
     return (

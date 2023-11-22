@@ -12,7 +12,7 @@ function GenreSorted(props) {
       </label>
       <select
         id="selectedGenre"
-        value={props.data.selectedValueGenre}
+        value={props.data.selectedGenreFilter}
         onChange={props.changeHandler}
         name="selectedGenreFilter"
         style={{
@@ -20,11 +20,13 @@ function GenreSorted(props) {
           textAlign: "center",
         }}
       >
+        <option value="all">All</option>
         <option value="personalGrowth">Personal Growth</option>
         <option value="trueCrimeAndInvestigativeJournalism">
           True Crime and Investigative Journalism
         </option>
         <option value="history">History</option>
+
         <option value="comedy">Comedy</option>
         <option value="entertainment">Entertainment</option>
         <option value="business">Business</option>
