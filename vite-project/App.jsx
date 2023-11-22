@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, NavLink } from "react-router-dom";
+
 import Preview from "/components/Preview";
 import Show from "/components/Show";
 import Episodes from "/components/Episodes";
-import Favourites from "/components/Favourites";
+import Favourites from "/pages/Favourites";
 import Dropdown from "/components/Dropdown";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
@@ -22,7 +23,7 @@ function App() {
   }
 
   useEffect(() => {
-    function handleGenreSelect(array) {
+    function handleForm(array) {
       const genreFilters = {
         all: 0,
         personalGrowth: 1,
@@ -37,6 +38,8 @@ function App() {
       };
 
       const selectedGenreFilter = formData.selectedGenreFilter;
+      const inputValue = formData.titleInput.toLowerCase();
+
       const filteredByGenreArray =
         selectedGenreFilter !== "all"
           ? array.filter((podcast) =>
@@ -44,19 +47,14 @@ function App() {
             )
           : array;
 
-      return filteredByGenreArray;
-    }
-
-    function handleTitleInput(array) {
-      const inputValue = formData.titleInput.toLowerCase();
-      const filteredByTitleArray =
+      const filteredArray =
         inputValue !== ""
-          ? array.filter((podcast) =>
+          ? filteredByGenreArray.filter((podcast) =>
               podcast.title.toLowerCase().includes(inputValue)
             )
           : array;
 
-      return filteredByTitleArray;
+      return filteredArray;
     }
 
     fetch("https://podcast-api.netlify.app/shows")
@@ -71,34 +69,26 @@ function App() {
           const reverseAlphabeticalPodcastData = [...data].sort((a, b) =>
             b.title.toLowerCase().localeCompare(a.title.toLowerCase())
           );
-          setPodcastData(
-            handleGenreSelect(handleTitleInput(reverseAlphabeticalPodcastData))
-          );
+          setPodcastData(handleForm(reverseAlphabeticalPodcastData));
         } else if (formData.selectedValueFilter === "newest-to-oldest") {
           const newestToOldestPodcastData = [...data].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return bDate - aDate;
           });
-          setPodcastData(
-            handleGenreSelect(handleTitleInput(newestToOldestPodcastData))
-          );
+          setPodcastData(handleForm(newestToOldestPodcastData));
         } else if (formData.selectedValueFilter === "oldest-to-newest") {
           const oldestToNewestPodcastData = [...data].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return aDate - bDate;
           });
-          setPodcastData(
-            handleGenreSelect(handleTitleInput(oldestToNewestPodcastData))
-          );
+          setPodcastData(handleForm(oldestToNewestPodcastData));
         } else {
           const alphabeticalPodcastData = [...data].sort((a, b) =>
             a.title.toLowerCase().localeCompare(b.title.toLowerCase())
           );
-          setPodcastData(
-            handleGenreSelect(handleTitleInput(alphabeticalPodcastData))
-          );
+          setPodcastData(handleForm(alphabeticalPodcastData));
         }
       })
       .catch((err) => console.log(err));
@@ -131,7 +121,7 @@ function App() {
           }}
         >
           <NavLink to="/">
-            <h1>All Podcasts</h1>
+            <h1>Podcasts</h1>
           </NavLink>
           <NavLink to="/favourites">
             <h1>Favourites</h1>

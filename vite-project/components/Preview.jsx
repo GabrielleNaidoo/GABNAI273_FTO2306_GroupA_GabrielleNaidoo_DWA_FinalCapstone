@@ -1,7 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import FavouritesContext from "../store/favourites-context";
 
 function Preview(props) {
+  const favouritesCtx = useContext(FavouritesContext);
+
+  const itemIsFavourite = favouritesCtx.isFavourite(props.id);
+
+  function toggleFavouritesHandler() {
+    if (itemIsFavourite) {
+      favouritesCtx.removeFavourite(props.id);
+      console.log("removed from favourites");
+    } else {
+      favouritesCtx.addFavourite(props.podcastData);
+      console.log("added to favourites");
+    }
+  }
+
   const genreTitle = {
     0: "All",
     1: "Personal Growth",
@@ -58,7 +73,9 @@ function Preview(props) {
       </div>
       <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
       <h4>Last Updated: {lastUpdated}</h4>
-      <h4>favourites star image</h4>
+      <button onClick={toggleFavouritesHandler}>
+        {itemIsFavourite ? "Remove from favourites" : "Add to favourites"}
+      </button>
       <Link to={`/show/${props.podcastData.id}`}>See details</Link>
     </div>
   );
