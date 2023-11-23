@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
 
 function Preview(props) {
   const favouritesCtx = useContext(FavouritesContext);
-
-  const itemIsFavourite = favouritesCtx.isFavourite(props.id);
+  const itemIsFavourite = favouritesCtx.isFavourite(props.podcastData.id);
 
   function toggleFavouritesHandler() {
     if (itemIsFavourite) {
-      favouritesCtx.removeFavourite(props.id);
+      favouritesCtx.removeFavourite(props.podcastData.id);
       console.log("removed from favourites");
     } else {
       favouritesCtx.addFavourite(props.podcastData);
-      console.log("added to favourites");
+      console.log("Added to favourites");
+      favouritesCtx.addedDate = new Date();
     }
   }
 

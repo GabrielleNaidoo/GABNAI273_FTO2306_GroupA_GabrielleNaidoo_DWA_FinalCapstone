@@ -4,6 +4,7 @@ const FavouritesContext = createContext({
   favourites: [],
   totalFavourites: 0,
   addFavourite: (favouritePodcast) => {},
+  addedDate: "",
   removeFavourite: (favouritesId) => {},
   isFavourite: (favouritesId) => {},
 });
@@ -27,6 +28,7 @@ export function FavouritesContextProvider(props) {
     favourites: userFavourites,
     totalFavourites: userFavourites.length,
     addFavourite: addFavouriteHandler,
+    addedDate: "",
     removeFavourite: removeFavouriteHandler,
     isFavourite: isFavouriteHandler,
   };

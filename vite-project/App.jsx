@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { Route, Routes, NavLink } from "react-router-dom";
-
+import { useState, useEffect, useContext } from "react";
+import { Route, Routes, NavLink, useLocation } from "react-router-dom";
+import FavouritesContext from "./store/favourites-context";
 import Preview from "/components/Preview";
 import Show from "/components/Show";
 import Episodes from "/components/Episodes";
@@ -16,6 +16,8 @@ function App() {
     selectedGenreFilter: "all",
     titleInput: "",
   });
+  const favouritesCtx = useContext(FavouritesContext);
+  const location = useLocation();
 
   function handleChange(event) {
     const { value, name } = event.target;
