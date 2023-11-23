@@ -23,7 +23,7 @@ function App() {
   }
 
   useEffect(() => {
-    function handleForm(array) {
+    function handleGenre(array) {
       const genreFilters = {
         all: 0,
         personalGrowth: 1,
@@ -38,23 +38,27 @@ function App() {
       };
 
       const selectedGenreFilter = formData.selectedGenreFilter;
-      const inputValue = formData.titleInput.toLowerCase();
 
-      const filteredByGenreArray =
+      const filteredGenreArray =
         selectedGenreFilter !== "all"
           ? array.filter((podcast) =>
               podcast.genres.includes(genreFilters[selectedGenreFilter])
             )
           : array;
 
-      const filteredArray =
+      return filteredGenreArray;
+    }
+
+    function handleTitle(array) {
+      const inputValue = formData.titleInput.toLowerCase();
+      const filteredTitleArray =
         inputValue !== ""
-          ? filteredByGenreArray.filter((podcast) =>
+          ? array.filter((podcast) =>
               podcast.title.toLowerCase().includes(inputValue)
             )
           : array;
 
-      return filteredArray;
+      return filteredTitleArray;
     }
 
     fetch("https://podcast-api.netlify.app/shows")
@@ -69,26 +73,28 @@ function App() {
           const reverseAlphabeticalPodcastData = [...data].sort((a, b) =>
             b.title.toLowerCase().localeCompare(a.title.toLowerCase())
           );
-          setPodcastData(handleForm(reverseAlphabeticalPodcastData));
+          setPodcastData(
+            handleGenre(handleTitle(reverseAlphabeticalPodcastData))
+          );
         } else if (formData.selectedValueFilter === "newest-to-oldest") {
           const newestToOldestPodcastData = [...data].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return bDate - aDate;
           });
-          setPodcastData(handleForm(newestToOldestPodcastData));
+          setPodcastData(handleGenre(handleTitle(newestToOldestPodcastData)));
         } else if (formData.selectedValueFilter === "oldest-to-newest") {
           const oldestToNewestPodcastData = [...data].sort((a, b) => {
             const aDate = new Date(a.updated) || 0;
             const bDate = new Date(b.updated) || 0;
             return aDate - bDate;
           });
-          setPodcastData(handleForm(oldestToNewestPodcastData));
+          setPodcastData(handleGenre(handleTitle(oldestToNewestPodcastData)));
         } else {
           const alphabeticalPodcastData = [...data].sort((a, b) =>
             a.title.toLowerCase().localeCompare(b.title.toLowerCase())
           );
-          setPodcastData(handleForm(alphabeticalPodcastData));
+          setPodcastData(handleGenre(handleTitle(alphabeticalPodcastData)));
         }
       })
       .catch((err) => console.log(err));
