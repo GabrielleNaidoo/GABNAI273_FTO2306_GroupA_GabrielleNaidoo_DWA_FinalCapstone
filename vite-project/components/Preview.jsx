@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
 
 function Preview(props) {
@@ -13,7 +13,6 @@ function Preview(props) {
     } else {
       favouritesCtx.addFavourite(props.podcastData);
       console.log("Added to favourites");
-      favouritesCtx.addedDate = new Date();
     }
   }
 
@@ -73,10 +72,41 @@ function Preview(props) {
       </div>
       <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
       <h4>Last Updated: {lastUpdated}</h4>
-      <button onClick={toggleFavouritesHandler}>
-        {itemIsFavourite ? "Remove from favourites" : "Add to favourites"}
-      </button>
-      <Link to={`/show/${props.podcastData.id}`}>See details</Link>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: "3rem",
+        }}
+      >
+        <NavLink
+          to={`/show/${props.podcastData.id}`}
+          style={{ textDecoration: "none" }}
+        >
+          <button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0.6rem 3rem",
+              fontSize: "1.1rem",
+            }}
+          >
+            See details
+          </button>
+        </NavLink>
+
+        <img
+          onClick={toggleFavouritesHandler}
+          src={
+            itemIsFavourite
+              ? "./images/heart-filled.png"
+              : "./images/heart-empty.png"
+          }
+          style={{ height: "3rem", width: "3rem" }}
+        ></img>
+      </div>
     </div>
   );
 }

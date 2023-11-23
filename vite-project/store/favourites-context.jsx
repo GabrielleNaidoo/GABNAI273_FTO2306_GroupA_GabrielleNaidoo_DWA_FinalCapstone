@@ -4,7 +4,6 @@ const FavouritesContext = createContext({
   favourites: [],
   totalFavourites: 0,
   addFavourite: (favouritePodcast) => {},
-  addedDate: "",
   removeFavourite: (favouritesId) => {},
   isFavourite: (favouritesId) => {},
 });
@@ -13,6 +12,8 @@ export function FavouritesContextProvider(props) {
   const [userFavourites, setUserFavourites] = useState([]);
 
   function addFavouriteHandler(favouritePodcast) {
+    const currentDate = new Date();
+    favouritePodcast.dateAdded = currentDate;
     setUserFavourites((prev) => [...prev, favouritePodcast]);
   }
   function removeFavouriteHandler(favouriteId) {
@@ -28,7 +29,6 @@ export function FavouritesContextProvider(props) {
     favourites: userFavourites,
     totalFavourites: userFavourites.length,
     addFavourite: addFavouriteHandler,
-    addedDate: "",
     removeFavourite: removeFavouriteHandler,
     isFavourite: isFavouriteHandler,
   };

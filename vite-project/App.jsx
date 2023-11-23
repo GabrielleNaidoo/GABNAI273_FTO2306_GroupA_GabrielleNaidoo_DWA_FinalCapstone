@@ -132,7 +132,12 @@ function App() {
             <h1>Podcasts</h1>
           </NavLink>
           <NavLink to="/favourites">
-            <h1>Favourites</h1>
+            <h1>
+              Favourites:
+              <span style={{ color: "red" }}>
+                {favouritesCtx.totalFavourites}
+              </span>
+            </h1>
           </NavLink>
         </div>
       </header>
