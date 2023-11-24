@@ -21,7 +21,9 @@ function CarouselComponent(props) {
           alt="cover image"
         ></img>
       </div>
-      <p>{`${props.carouselData.description.slice(0, 150)}...`}</p>
+      <p style={{ textAlign: "center" }}>
+        {`${props.carouselData.description.slice(0, 350)}...`}
+      </p>
     </div>
   );
 }
