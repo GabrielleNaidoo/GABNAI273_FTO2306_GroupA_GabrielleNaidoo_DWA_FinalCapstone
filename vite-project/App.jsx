@@ -167,7 +167,10 @@ function App() {
           }
         />
         <Route path="/show/:id" element={<Show />} />
-        <Route path="/show/:id/season/:seasonNumber" element={<Episodes />} />
+        <Route
+          path="/show/:id/season/:seasonNumber"
+          element={<Episodes podcastData={podcastData} />}
+        />
         <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </>

@@ -27,6 +27,7 @@ function Show() {
         episodes: season.episodes,
         seasonImage: season.image,
         seasonInfo: season,
+        showId: id,
       },
     });
   }

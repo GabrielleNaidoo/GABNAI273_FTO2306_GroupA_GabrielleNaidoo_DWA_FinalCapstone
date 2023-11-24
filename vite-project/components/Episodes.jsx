@@ -2,12 +2,17 @@ import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
 
-function Episodes() {
+function Episodes(props) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { episodes, seasonImage, seasonInfo } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
-  // console.log(seasonInfo);
+  const { episodes, seasonImage, seasonInfo, showId } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
+  showId && console.log(showId);
   const favouritesCtx = useContext(FavouritesContext);
+
+  const seasonShowMatch = props.podcastData.filter(
+    (show) => showId && show.id === showId
+  );
+  seasonShowMatch && console.log(seasonShowMatch);
 
   function toggleFavouritesHandler(episode) {
     const itemIsFavourite = favouritesCtx.isFavourite(episode.title);
@@ -15,7 +20,7 @@ function Episodes() {
       favouritesCtx.removeFavourite(episode.title);
       console.log("removed from favourites");
     } else {
-      favouritesCtx.addFavourite(episode);
+      favouritesCtx.addFavourite(episode, seasonShowMatch);
       console.log("Added to favourites");
     }
   }
@@ -54,7 +59,7 @@ function Episodes() {
   return (
     <div>
       <button onClick={handleClickBack}>Back to show</button>
-      <h1>EPISODES</h1>
+      <h1>{seasonInfo.title}</h1>
       <div>{episodeItems || "No episodes available"}</div>
     </div>
   );
