@@ -11,10 +11,11 @@ const FavouritesContext = createContext({
 export function FavouritesContextProvider(props) {
   const [userFavourites, setUserFavourites] = useState([]);
 
-  function addFavouriteHandler(favouriteEpisode, show) {
+  function addFavouriteHandler(favouriteEpisode, show, seasonNumber) {
     const currentDate = new Date();
     favouriteEpisode.dateAdded = currentDate;
     favouriteEpisode.showMatch = show;
+    favouriteEpisode.seasonNumber = seasonNumber;
     setUserFavourites((prev) => [...prev, favouriteEpisode]);
   }
   function removeFavouriteHandler(favouriteEpisodeTitle) {

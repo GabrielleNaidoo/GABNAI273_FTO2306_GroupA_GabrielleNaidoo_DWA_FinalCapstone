@@ -43,6 +43,7 @@ function Favourites() {
         ></img>
         <div>
           <h4>{show.title}</h4>
+          <h5>{`Season: ${favourite.seasonNumber}`}</h5>
           <h3>{`Episode ${favourite.episode} : ${favourite.title}`}</h3>
           <img
             onClick={() => toggleFavouritesHandler(favourite)}

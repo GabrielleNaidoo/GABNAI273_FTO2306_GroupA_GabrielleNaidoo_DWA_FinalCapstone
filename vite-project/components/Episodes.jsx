@@ -6,13 +6,13 @@ function Episodes(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const { episodes, seasonImage, seasonInfo, showId } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
-  showId && console.log(showId);
+
   const favouritesCtx = useContext(FavouritesContext);
 
   const seasonShowMatch = props.podcastData.filter(
     (show) => showId && show.id === showId
   );
-  seasonShowMatch && console.log(seasonShowMatch);
+  const seasonNumber = seasonInfo && seasonInfo.season;
 
   function toggleFavouritesHandler(episode) {
     const itemIsFavourite = favouritesCtx.isFavourite(episode.title);
@@ -20,7 +20,7 @@ function Episodes(props) {
       favouritesCtx.removeFavourite(episode.title);
       console.log("removed from favourites");
     } else {
-      favouritesCtx.addFavourite(episode, seasonShowMatch);
+      favouritesCtx.addFavourite(episode, seasonShowMatch, seasonNumber);
       console.log("Added to favourites");
     }
   }
