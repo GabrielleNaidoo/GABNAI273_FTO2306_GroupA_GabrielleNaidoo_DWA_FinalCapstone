@@ -1,21 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import FavouritesContext from "../store/favourites-context";
 
 function Preview(props) {
-  const favouritesCtx = useContext(FavouritesContext);
-  const itemIsFavourite = favouritesCtx.isFavourite(props.podcastData.id);
-
-  function toggleFavouritesHandler() {
-    if (itemIsFavourite) {
-      favouritesCtx.removeFavourite(props.podcastData.id);
-      console.log("removed from favourites");
-    } else {
-      favouritesCtx.addFavourite(props.podcastData);
-      console.log("Added to favourites");
-    }
-  }
-
   const genreTitle = {
     0: "All",
     1: "Personal Growth",
@@ -97,7 +83,7 @@ function Preview(props) {
           </button>
         </NavLink>
 
-        <img
+        {/* <img
           onClick={toggleFavouritesHandler}
           src={
             itemIsFavourite
@@ -105,7 +91,7 @@ function Preview(props) {
               : "./images/heart-empty.png"
           }
           style={{ height: "3rem", width: "3rem" }}
-        ></img>
+        ></img> */}
       </div>
     </div>
   );

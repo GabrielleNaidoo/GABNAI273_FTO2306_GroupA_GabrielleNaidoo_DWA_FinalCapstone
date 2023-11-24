@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import FavouritesContext from "../store/favourites-context";
 
 function Episodes() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { episodes, seasonImage } = location.state || {};
-  // console.log(episodes);
+  const { episodes, seasonImage, seasonInfo } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
+  // console.log(seasonInfo);
+  const favouritesCtx = useContext(FavouritesContext);
+
+  function toggleFavouritesHandler(episode) {
+    const itemIsFavourite = favouritesCtx.isFavourite(episode.title);
+    if (itemIsFavourite) {
+      favouritesCtx.removeFavourite(episode.title);
+      console.log("removed from favourites");
+    } else {
+      favouritesCtx.addFavourite(episode);
+      console.log("Added to favourites");
+    }
+  }
 
   function handleClickBack() {
     navigate(-1);
@@ -14,7 +27,7 @@ function Episodes() {
   const episodeItems =
     episodes &&
     episodes.map((episode) => (
-      <div key={episode.episode}>
+      <div key={episode.episode} id={episode.episode}>
         <h1>
           <span>Episode {episode.episode}: </span>
           {episode.title}
@@ -25,6 +38,16 @@ function Episodes() {
           style={{ height: "12rem", width: "6rem" }}
         ></img>
         <p>{episode.description}</p>
+        <img
+          onClick={() => toggleFavouritesHandler(episode)}
+          src={
+            favouritesCtx.isFavourite(episode.title)
+              ? "/images/heart-filled.png"
+              : "/images/heart-empty.png"
+          }
+          alt="favourite image"
+          style={{ height: "3rem", width: "3rem" }}
+        ></img>
       </div>
     ));
 

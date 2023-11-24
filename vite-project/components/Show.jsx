@@ -23,7 +23,11 @@ function Show() {
 
   function handleSeasonButtonClick(season) {
     navigate(`/show/${id}/season/${season.season}`, {
-      state: { episodes: season.episodes, seasonImage: season.image },
+      state: {
+        episodes: season.episodes,
+        seasonImage: season.image,
+        seasonInfo: season,
+      },
     });
   }
 

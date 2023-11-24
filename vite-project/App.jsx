@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Route, Routes, NavLink, useLocation } from "react-router-dom";
 import FavouritesContext from "./store/favourites-context";
+import Carousel from "./carousel/Carousel";
 import Preview from "/components/Preview";
 import Show from "/components/Show";
 import Episodes from "/components/Episodes";
@@ -117,6 +118,7 @@ function App() {
 
   return (
     <>
+      <Carousel data={podcastData} />
       <header>
         <h1 className="name">PodPortal</h1>
         <div

@@ -3,26 +3,28 @@ import { createContext, useState } from "react";
 const FavouritesContext = createContext({
   favourites: [],
   totalFavourites: 0,
-  addFavourite: (favouritePodcast) => {},
-  removeFavourite: (favouritesId) => {},
-  isFavourite: (favouritesId) => {},
+  addFavourite: (favouriteEpisode) => {},
+  removeFavourite: (favouriteEpisodeTitle) => {},
+  isFavourite: (favouriteEpisodeTitle) => {},
 });
 
 export function FavouritesContextProvider(props) {
   const [userFavourites, setUserFavourites] = useState([]);
 
-  function addFavouriteHandler(favouritePodcast) {
+  function addFavouriteHandler(favouriteEpisode) {
     const currentDate = new Date();
-    favouritePodcast.dateAdded = currentDate;
-    setUserFavourites((prev) => [...prev, favouritePodcast]);
+    favouriteEpisode.dateAdded = currentDate;
+    setUserFavourites((prev) => [...prev, favouriteEpisode]);
   }
-  function removeFavouriteHandler(favouriteId) {
+  function removeFavouriteHandler(favouriteEpisodeTitle) {
     setUserFavourites((prev) => {
-      return prev.filter((podcast) => podcast.id !== favouriteId);
+      return prev.filter((episode) => episode.title !== favouriteEpisodeTitle);
     });
   }
-  function isFavouriteHandler(favouriteId) {
-    return userFavourites.some((podcast) => podcast.id === favouriteId);
+  function isFavouriteHandler(favouriteEpisodeTitle) {
+    return userFavourites.some(
+      (episode) => episode.title === favouriteEpisodeTitle
+    );
   }
 
   const context = {
