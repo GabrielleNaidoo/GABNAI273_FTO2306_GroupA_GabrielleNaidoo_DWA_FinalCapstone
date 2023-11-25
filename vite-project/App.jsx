@@ -144,24 +144,24 @@ function App() {
         </div>
       </header>
 
-      <div className="filter-bar">
-        <div>
-          <h2>
-            <SearchBox data={formData} changeHandler={handleChange} />
-          </h2>
-        </div>
-        <div>
-          <GenreDropdown data={formData} changeHandler={handleChange} />
-        </div>
-        <div>
-          <Dropdown data={formData} changeHandler={handleChange} />
-        </div>
-      </div>
       <Routes>
         <Route
           path="/"
           element={
             <>
+              <div className="filter-bar">
+                <div>
+                  <h2>
+                    <SearchBox data={formData} changeHandler={handleChange} />
+                  </h2>
+                </div>
+                <div>
+                  <GenreDropdown data={formData} changeHandler={handleChange} />
+                </div>
+                <div>
+                  <Dropdown data={formData} changeHandler={handleChange} />
+                </div>
+              </div>
               <div className="previews-container">{podcastElement}</div>
             </>
           }

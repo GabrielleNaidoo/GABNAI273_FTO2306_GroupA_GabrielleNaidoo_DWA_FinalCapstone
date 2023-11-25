@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Preview from "./Preview";
 
-function GenreSorted(props) {
+function GenreDropdown(props) {
   return (
     <div className="dropdown-genre-page">
       <label
@@ -38,7 +38,7 @@ function GenreSorted(props) {
   );
 }
 
-export default GenreSorted;
+export default GenreDropdown;
 
 // const podcastElement = podcastData.map((element) => {
 //   return (

@@ -58,7 +58,8 @@ function Carousel(props) {
   };
   return (
     <div style={{ marginBottom: "10rem" }}>
-      <p>You might like:</p>
+      <h1>Welcome to PodPortal</h1>
+      <h3>You might like:</h3>
       <Slider {...settings}>{carouselItems}</Slider>
     </div>
   );
