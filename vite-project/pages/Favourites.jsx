@@ -1,13 +1,31 @@
 import React, { useContext, useState, useEffect } from "react";
+// import { useLocation, useNavigate } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
+import AudioContext from "../store/audio-context";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
 import Dropdown from "/components/DropDown";
+// import Episodes from "/components/Episodes";
 
 function Favourites() {
   // context:
   const [favourites, setFavourites] = useState([]);
   const favouritesCtx = useContext(FavouritesContext);
+  const AudioCtx = useContext(AudioContext);
+  // const navigate = useNavigate();
+
+  // function handleClick(favourite, show) {
+  //   navigate(`/audioplayer`, {
+  //     state: {
+  //       episodeTitle: show.title,
+  //       episodeAudio: favourite.file,
+  //     },
+  //   });
+  // }
+  function handleClick(favourite, show) {
+    AudioCtx.currentAudioHandler(favourite);
+    AudioCtx.showTitleHandler(show.title);
+  }
 
   function toggleFavouritesHandler(episode) {
     const itemIsFavourite = favouritesCtx.isFavourite(episode.title);
@@ -31,20 +49,19 @@ function Favourites() {
   }
 
   useEffect(() => {
+    const genreFilters = {
+      all: 0,
+      personalGrowth: 1,
+      trueCrimeAndInvestigativeJournalism: 2,
+      history: 3,
+      comedy: 4,
+      entertainment: 5,
+      business: 6,
+      fiction: 7,
+      news: 8,
+      kidsAndFamily: 9,
+    };
     function handleGenre(array) {
-      const genreFilters = {
-        all: 0,
-        personalGrowth: 1,
-        trueCrimeAndInvestigativeJournalism: 2,
-        history: 3,
-        comedy: 4,
-        entertainment: 5,
-        business: 6,
-        fiction: 7,
-        news: 8,
-        kidsAndFamily: 9,
-      };
-
       const selectedGenreFilter = formData.selectedGenreFilter;
 
       const filteredGenreArray =
@@ -114,8 +131,39 @@ function Favourites() {
     const date = `${favourite.dateAdded.getDate()}/${
       favourite.dateAdded.getMonth() + 1
     }/${favourite.dateAdded.getFullYear()}`;
-
     const time = `${favourite.dateAdded.getHours()}:${favourite.dateAdded.getMinutes()}`;
+
+    const genreTitle = {
+      0: "All",
+      1: "Personal Growth",
+      2: "True Crime and Investigative Journalism",
+      3: "History",
+      4: "Comedy",
+      5: "Entertainment",
+      6: "Business",
+      7: "Fiction",
+      8: "News",
+      9: "Kids and Family",
+    };
+
+    const genreMap = show.genres.map((genre) => {
+      return (
+        <li
+          key={genre}
+          style={{
+            backgroundColor: "#F8F8F8",
+            marginBottom: "1rem",
+            display: "inline-block",
+            listStyle: "none",
+            padding: "0.25rem 0.5rem",
+          }}
+        >
+          <div className="genre-list-item-text-container">
+            {genreTitle[genre]}
+          </div>
+        </li>
+      );
+    });
 
     return (
       <div
@@ -141,6 +189,10 @@ function Favourites() {
           <h4>{show.title}</h4>
           <h5>{`Season: ${favourite.seasonNumber}`}</h5>
           <h3>{`Episode ${favourite.episode} : ${favourite.title}`}</h3>
+          <div>
+            <ul>{genreMap}</ul>
+          </div>
+
           <img
             onClick={() => toggleFavouritesHandler(favourite)}
             src={
@@ -151,6 +203,7 @@ function Favourites() {
             alt="favourite image"
             style={{ height: "3rem", width: "3rem" }}
           ></img>
+          <button onClick={() => handleClick(favourite, show)}>Listen</button>
         </div>
       </div>
     );

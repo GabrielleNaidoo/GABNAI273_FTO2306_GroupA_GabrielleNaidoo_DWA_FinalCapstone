@@ -141,6 +141,7 @@ function App() {
               </span>
             </h1>
           </NavLink>
+          <AudioPlayer />
         </div>
       </header>
 
@@ -172,7 +173,7 @@ function App() {
           path="/show/:id/season/:seasonNumber"
           element={<Episodes podcastData={podcastData} />}
         />
-        <Route path="/audioplayer" element={<AudioPlayer />} />
+        {/* <Route path="/audioplayer" element={<AudioPlayer />} /> */}
         <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </>

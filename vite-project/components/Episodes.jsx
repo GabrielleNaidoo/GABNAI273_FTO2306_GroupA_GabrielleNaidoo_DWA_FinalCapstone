@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
 // import ReactAudioPlayer from "react-audio-player";
-import AudioPlayer from "./AudioPlayer";
+// import AudioPlayer from "./AudioPlayer";
+import AudioContext from "../store/audio-context";
 
 function Episodes(props) {
   const location = useLocation();
   const navigate = useNavigate();
+  const AudioCtx = useContext(AudioContext);
   const { episodes, seasonImage, seasonInfo, showId } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
 
   const favouritesCtx = useContext(FavouritesContext);
@@ -31,13 +33,16 @@ function Episodes(props) {
     navigate(-1);
   }
 
+  // function handleClick(episode) {
+  //   navigate(`/audioplayer`, {
+  //     state: {
+  //       episodeTitle: episode.title,
+  //       episodeAudio: episode.file,
+  //     },
+  //   });
+  // }
   function handleClick(episode) {
-    navigate(`/audioplayer`, {
-      state: {
-        episodeTitle: episode.title,
-        episodeAudio: episode.file,
-      },
-    });
+    AudioCtx.currentAudioHandler(episode);
   }
 
   const episodeItems =

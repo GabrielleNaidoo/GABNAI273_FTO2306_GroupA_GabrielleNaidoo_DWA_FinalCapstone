@@ -6,6 +6,7 @@ const FavouritesContext = createContext({
   addFavourite: (favouriteEpisode) => {},
   removeFavourite: (favouriteEpisodeTitle) => {},
   isFavourite: (favouriteEpisodeTitle) => {},
+  currentAudioFile: "",
 });
 
 export function FavouritesContextProvider(props) {
@@ -35,6 +36,7 @@ export function FavouritesContextProvider(props) {
     addFavourite: addFavouriteHandler,
     removeFavourite: removeFavouriteHandler,
     isFavourite: isFavouriteHandler,
+    currentAudioFile: "",
   };
 
   return (
