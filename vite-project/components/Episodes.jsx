@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
+// import ReactAudioPlayer from "react-audio-player";
+import AudioPlayer from "./AudioPlayer";
 
 function Episodes(props) {
   const location = useLocation();
@@ -29,6 +31,15 @@ function Episodes(props) {
     navigate(-1);
   }
 
+  function handleClick(episode) {
+    navigate(`/audioplayer`, {
+      state: {
+        episodeTitle: episode.title,
+        episodeAudio: episode.file,
+      },
+    });
+  }
+
   const episodeItems =
     episodes &&
     episodes.map((episode) => (
@@ -42,6 +53,7 @@ function Episodes(props) {
           alt={episode.title}
           style={{ height: "12rem", width: "6rem" }}
         ></img>
+        <button onClick={() => handleClick(episode)}>Listen</button>
         <p>{episode.description}</p>
         <img
           onClick={() => toggleFavouritesHandler(episode)}

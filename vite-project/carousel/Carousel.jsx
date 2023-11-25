@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "./slick.css";
 import "./slick-theme.css";
-import Preview from "../components/Preview";
 
 function CarouselComponent(props) {
   return (
@@ -50,7 +49,12 @@ function Carousel(props) {
     fade: true,
   };
   return (
-    <div style={{ marginBottom: "10rem" }}>
+    <div
+      style={{
+        marginBottom: "10rem",
+        height: "100vh",
+      }}
+    >
       <h1>Welcome to PodPortal</h1>
       <h3>You might like:</h3>
       <Slider {...settings}>{carouselItems}</Slider>

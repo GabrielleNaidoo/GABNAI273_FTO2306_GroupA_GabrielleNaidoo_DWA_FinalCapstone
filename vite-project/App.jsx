@@ -9,6 +9,7 @@ import Favourites from "/pages/Favourites";
 import Dropdown from "/components/Dropdown";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
+import AudioPlayer from "/components/AudioPlayer";
 
 function App() {
   const [podcastData, setPodcastData] = useState([]);
@@ -118,7 +119,6 @@ function App() {
 
   return (
     <>
-      <Carousel data={podcastData} />
       <header>
         <h1 className="name">PodPortal</h1>
         <div
@@ -149,6 +149,7 @@ function App() {
           path="/"
           element={
             <>
+              <Carousel data={podcastData} />
               <div className="filter-bar">
                 <div>
                   <h2>
@@ -171,6 +172,7 @@ function App() {
           path="/show/:id/season/:seasonNumber"
           element={<Episodes podcastData={podcastData} />}
         />
+        <Route path="/audioplayer" element={<AudioPlayer />} />
         <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </>
