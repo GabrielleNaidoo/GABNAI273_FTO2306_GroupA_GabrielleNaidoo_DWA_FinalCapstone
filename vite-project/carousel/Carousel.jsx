@@ -29,16 +29,9 @@ function CarouselComponent(props) {
 }
 
 function Carousel(props) {
-  const [carouselData, setCarouselData] = useState([]);
+  const carouselArray = props.data.slice(15, 20);
 
-  useEffect(() => {
-    const randomNumber = Math.floor(Math.random() * (props.data.length - 10));
-    const newCarouselArray = props.data.slice(randomNumber, randomNumber + 10);
-    setCarouselData([...newCarouselArray]);
-    console.log(carouselData);
-  }, []);
-
-  const carouselItems = carouselData.map((carouselItem) => {
+  const carouselItems = carouselArray.map((carouselItem) => {
     return (
       <div key={carouselItem.id}>
         <CarouselComponent carouselData={carouselItem} />
@@ -53,7 +46,7 @@ function Carousel(props) {
     centerMode: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    speed: 500,
+    speed: 400,
     fade: true,
   };
   return (

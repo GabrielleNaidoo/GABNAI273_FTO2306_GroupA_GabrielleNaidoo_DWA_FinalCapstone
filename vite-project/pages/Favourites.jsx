@@ -70,6 +70,8 @@ function Favourites() {
 
       return filteredTitleArray;
     }
+
+    // Allows you to fetch the current updateFavourites without having infinite loop due to favourites constantly changing(useEffect dependency)
     let updatedFavourites = [...favouritesCtx.favourites];
 
     if (formData.selectedValueFilter === "reverse-alphabetical") {
