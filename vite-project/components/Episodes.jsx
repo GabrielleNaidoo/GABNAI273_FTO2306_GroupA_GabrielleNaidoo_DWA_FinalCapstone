@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
-// import ReactAudioPlayer from "react-audio-player";
-// import AudioPlayer from "./AudioPlayer";
 import AudioContext from "../store/audio-context";
 
 function Episodes(props) {
@@ -33,14 +31,6 @@ function Episodes(props) {
     navigate(-1);
   }
 
-  // function handleClick(episode) {
-  //   navigate(`/audioplayer`, {
-  //     state: {
-  //       episodeTitle: episode.title,
-  //       episodeAudio: episode.file,
-  //     },
-  //   });
-  // }
   function handleClick(episode) {
     AudioCtx.currentAudioHandler(episode);
   }

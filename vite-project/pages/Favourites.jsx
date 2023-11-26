@@ -1,27 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
 import FavouritesContext from "../store/favourites-context";
 import AudioContext from "../store/audio-context";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
 import Dropdown from "/components/DropDown";
-// import Episodes from "/components/Episodes";
 
 function Favourites() {
   // context:
   const [favourites, setFavourites] = useState([]);
   const favouritesCtx = useContext(FavouritesContext);
   const AudioCtx = useContext(AudioContext);
-  // const navigate = useNavigate();
 
-  // function handleClick(favourite, show) {
-  //   navigate(`/audioplayer`, {
-  //     state: {
-  //       episodeTitle: show.title,
-  //       episodeAudio: favourite.file,
-  //     },
-  //   });
-  // }
   function handleClick(favourite, show) {
     AudioCtx.currentAudioHandler(favourite);
     AudioCtx.showTitleHandler(show.title);
