@@ -4,10 +4,30 @@ import AudioContext from "../store/audio-context";
 
 function AudioPlayer() {
   const AudioCtx = useContext(AudioContext);
+  // const isAudioPlaying = Boolean(AudioCtx.currentAudioFile);
+
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     if (isAudioPlaying) {
+  //       const message =
+  //         "Are you sure you want to leave? Your audio is still playing.";
+  //       event.returnValue = message; // Standard for most browsers
+  //       return message; // For some older browsers
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [isAudioPlaying]);
 
   return (
     <div>
-      <h1>{AudioCtx.currentShowTitle}</h1>
+      {AudioCtx.currentAudioFile && (
+        <p>{`Episode ${AudioCtx.currentEpisode}: ${AudioCtx.currentEpisodeTitle}`}</p>
+      )}
       <ReactAudioPlayer
         key={AudioCtx.currentEpisode}
         src={AudioCtx.currentAudioFile}

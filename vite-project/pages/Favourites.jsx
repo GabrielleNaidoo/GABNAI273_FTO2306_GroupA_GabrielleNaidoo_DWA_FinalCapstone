@@ -11,9 +11,8 @@ function Favourites() {
   const favouritesCtx = useContext(FavouritesContext);
   const AudioCtx = useContext(AudioContext);
 
-  function handleClick(favourite, show) {
+  function handleClick(favourite) {
     AudioCtx.currentAudioHandler(favourite);
-    AudioCtx.showTitleHandler(show.title);
   }
 
   function toggleFavouritesHandler(episode) {
@@ -192,7 +191,7 @@ function Favourites() {
             alt="favourite image"
             style={{ height: "3rem", width: "3rem" }}
           ></img>
-          <button onClick={() => handleClick(favourite, show)}>Listen</button>
+          <button onClick={() => handleClick(favourite)}>Listen</button>
         </div>
       </div>
     );

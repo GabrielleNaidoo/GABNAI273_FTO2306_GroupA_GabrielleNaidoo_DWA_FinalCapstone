@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Route, Routes, NavLink, useLocation } from "react-router-dom";
+import { Route, Routes, NavLink } from "react-router-dom";
 import FavouritesContext from "./store/favourites-context";
 import Carousel from "./carousel/Carousel";
 import Preview from "/components/Preview";
@@ -10,16 +10,19 @@ import Dropdown from "/components/Dropdown";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
 import AudioPlayer from "/components/AudioPlayer";
+// import { createClient } from "@supabase/supabase-js";
+// import { Auth } from "@supabase/auth-ui-react";
+// import { ThemeSupa } from "@supabase/auth-ui-shared";
 
-function App() {
+export function App() {
   const [podcastData, setPodcastData] = useState([]);
   const [formData, setFormData] = useState({
     selectedValueFilter: "alphabetical",
     selectedGenreFilter: "all",
     titleInput: "",
   });
+
   const favouritesCtx = useContext(FavouritesContext);
-  const location = useLocation();
 
   function handleChange(event) {
     const { value, name } = event.target;
@@ -147,6 +150,7 @@ function App() {
       <div>Back to top arrow(sticky)</div>
 
       <Routes>
+        {/* <Route path="/loginPage" element={Login}></Route> */}
         <Route
           path="/"
           element={
@@ -181,3 +185,37 @@ function App() {
 }
 
 export default App;
+
+// const supabase = createClient(
+//   "https://pboftvcxrpbbdjawbkrc.supabase.co",
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBib2Z0dmN4cnBiYmRqYXdia3JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDExMDEzODYsImV4cCI6MjAxNjY3NzM4Nn0.COmlMAs-G2q9hXHptorFA0Pasuw_vZMosXoYiAq9WDk"
+// );
+
+// export function Login() {
+//   const [session, setSession] = useState(null);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     supabase.auth.getSession().then(({ data: { session } }) => {
+//       setSession(session);
+//     });
+
+//     const {
+//       data: { subscription },
+//     } = supabase.auth.onAuthStateChange((_event, session) => {
+//       setSession(session);
+//     });
+
+//     if (session) {
+//       navigate("/");
+//     }
+
+//     return () => subscription.unsubscribe();
+//   }, [navigate, session]);
+
+//   if (!session) {
+//     return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
+//   }
+
+//   return null;
+// }

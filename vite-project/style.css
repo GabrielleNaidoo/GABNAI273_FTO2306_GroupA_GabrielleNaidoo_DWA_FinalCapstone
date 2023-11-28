@@ -1,8 +1,19 @@
+/*
+colors:
+#05161a
+#072e33
+#0c7075
+#0f969c
+#6da5c0
+#294d61
+*/
+
 body {
-  background-color: aliceblue;
+  background-color: #072e33;
+  color: #ffffff;
   scroll-behavior: smooth;
   position: relative;
-  font-family: "Nunito Sans", "sans-serif";
+  font-family: "Montserrat", "sans-serif";
 }
 
 /* Carousel: */
@@ -43,11 +54,11 @@ header {
   gap: 5rem;
 }
 
-.preview {
+/* .preview {
   background-color: #b8b8b8;
   padding: 2rem;
   border-radius: 0.5rem;
-}
+} */
 
 .preview-title {
   font-weight: 800;
@@ -65,18 +76,15 @@ header {
   height: 16rem;
   width: 12rem;
 }
-.preview-genres {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 2rem 0 1rem 0;
-}
-.preview-genres li div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.preview-seasons {
-}
 
 /* Show Overlay*/
+
+.image {
+  border-radius: 0.5rem;
+  box-shadow: -9px 5px 27px -6px rgba(12, 112, 117, 0.75);
+}
+
+.image:hover {
+  transform: scale(1.05);
+  box-shadow: none;
+}

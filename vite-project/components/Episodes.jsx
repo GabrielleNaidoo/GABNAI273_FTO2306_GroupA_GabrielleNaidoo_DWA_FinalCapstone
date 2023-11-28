@@ -7,9 +7,8 @@ function Episodes(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const AudioCtx = useContext(AudioContext);
-  const { episodes, seasonImage, seasonInfo, showId } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
-
   const favouritesCtx = useContext(FavouritesContext);
+  const { episodes, seasonImage, seasonInfo, showId } = location.state || {}; //episodes is an array of all the episodes in a **(season)**
 
   const seasonShowMatch = props.podcastData.filter(
     (show) => showId && show.id === showId

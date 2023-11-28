@@ -1,5 +1,40 @@
 import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { Card, Button, Chip } from "@mui/material";
+import styled from "@emotion/styled";
+
+const StyledCard = styled(Card)`
+  && {
+    background-color: #05161a;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    color: #f7f7f7;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const StyledChip = styled(Chip)`
+  && {
+    padding: 0.1rem 0.2rem;
+    background-color: #294d61;
+    color: #ffffff;
+    font-weight: 500;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  && {
+    background-color: #0c7075;
+    padding: 0.2rem 0.4rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0f969c;
+  }
+`;
 
 function Preview(props) {
   const genreTitle = {
@@ -20,41 +55,34 @@ function Preview(props) {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  const lastUpdated = `${day}/${month}/${year}`;
+  const lastUpdated = `${day} / ${month} / ${year}`;
 
   const genreMap = props.podcastData.genres.map((genre) => {
     return (
-      <li
+      <StyledChip
         key={genre}
-        style={{
-          backgroundColor: "#F8F8F8",
-          marginBottom: "1rem",
-          display: "inline-block",
-          listStyle: "none",
-          padding: "0.25rem 0.5rem",
-        }}
-      >
-        <div className="genre-list-item-text-container">
-          {genreTitle[genre]}
-        </div>
-      </li>
+        label={genreTitle[genre].toUpperCase()}
+      ></StyledChip>
     );
   });
 
   return (
-    <div className="preview">
+    <StyledCard>
       <p className="preview-title">{props.podcastData.title}</p>
       <div className="preview-cover-image-container">
         <img
-          className="preview-cover-image"
+          className="preview-cover-image image"
           src={props.podcastData.image}
           alt="cover image"
         ></img>
       </div>
       <div>
-        <ul className="preview-genres" style={{ display: "flex", gap: "1rem" }}>
+        <div
+          className="preview-genres"
+          style={{ display: "flex", gap: "1rem" }}
+        >
           {genreMap}
-        </ul>
+        </div>
       </div>
       <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
       <h4>Last Updated: {lastUpdated}</h4>
@@ -70,30 +98,12 @@ function Preview(props) {
           to={`/show/${props.podcastData.id}`}
           style={{ textDecoration: "none" }}
         >
-          <button
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.6rem 3rem",
-              fontSize: "1.1rem",
-            }}
-          >
+          <StyledButton variant="contained" size="small">
             See details
-          </button>
+          </StyledButton>
         </NavLink>
-
-        {/* <img
-          onClick={toggleFavouritesHandler}
-          src={
-            itemIsFavourite
-              ? "./images/heart-filled.png"
-              : "./images/heart-empty.png"
-          }
-          style={{ height: "3rem", width: "3rem" }}
-        ></img> */}
       </div>
-    </div>
+    </StyledCard>
   );
 }
 

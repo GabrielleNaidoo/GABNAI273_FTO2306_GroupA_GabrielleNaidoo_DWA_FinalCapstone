@@ -2,30 +2,27 @@ import { createContext, useState } from "react";
 
 const AudioContext = createContext({
   currentAudioFile: "",
+  currentEpisodeTitle: "",
   currentEpisode: "",
-  favouriteShowTitle: "",
   currentAudioHandler: (episode) => {},
-  showTitleHandler: (show) => {},
 });
 
 export function AudioContextProvider(props) {
   const [currentAudio, setCurrentAudio] = useState("");
-  const [currentShowTitle, setCurrentShowTitle] = useState("");
   const [currentEpisodeTitle, setCurrentEpisodeTitle] = useState("");
+  const [currentEpisode, setCurrentEpisode] = useState("");
 
   function handleAudioChange(episode) {
     setCurrentAudio(episode.file);
     setCurrentEpisodeTitle(episode.title);
+    setCurrentEpisode(episode.episode);
   }
-  function handleFavouriteShowTitle(show) {
-    setCurrentShowTitle(show.title);
-  }
+
   const context = {
     currentAudioFile: currentAudio,
-    currentEpisode: currentEpisodeTitle,
-    favouriteShowTitle: currentShowTitle,
     currentAudioHandler: handleAudioChange,
-    showTitleHandler: handleFavouriteShowTitle,
+    currentEpisodeTitle: currentEpisodeTitle,
+    currentEpisode: currentEpisode,
   };
 
   return (
