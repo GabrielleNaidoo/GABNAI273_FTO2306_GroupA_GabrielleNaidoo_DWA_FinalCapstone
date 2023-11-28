@@ -133,10 +133,10 @@ export function App() {
             gap: "4rem",
           }}
         >
-          <NavLink to="/">
+          <NavLink className="link" to="/">
             <h1>Podcasts</h1>
           </NavLink>
-          <NavLink to="/favourites">
+          <NavLink className="link" to="/favourites">
             <h1>
               Favourites:
               <span style={{ color: "red" }}>

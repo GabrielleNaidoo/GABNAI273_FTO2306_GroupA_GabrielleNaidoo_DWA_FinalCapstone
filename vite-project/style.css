@@ -13,10 +13,51 @@ body {
   color: #ffffff;
   scroll-behavior: smooth;
   position: relative;
-  font-family: "Montserrat", "sans-serif";
+  font-family: "Lato", sans-serif;
+}
+
+/********************reusable css*********************/
+
+.flex-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.image:hover {
+  transform: scale(1.05);
 }
 
 /* Carousel: */
+.carousel-container {
+}
+
+.carousel-image {
+  width: 25rem;
+  height: 33.33rem;
+}
+
+.carousel-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.carousel-title {
+  font-size: 3rem;
+  font-weight: 900;
+  align-self: center;
+}
+
+.carousel-description {
+  font-size: 1.5rem;
+  padding: 0.75rem 1.5rem;
+}
 
 /* Header */
 header {
@@ -25,9 +66,7 @@ header {
   justify-content: space-between;
 }
 
-/* Favourites */
-
-/* filter-bar */
+/* entire filter-bar */
 .filter-bar {
   height: 4rem;
   background-color: rgb(226, 73, 73);
@@ -36,15 +75,15 @@ header {
   align-items: center;
 }
 
-/* sort by dropdown menu */
+/* order sorting */
 
-/*genre sorting*/
+/*genre dropdown*/
 .genre-title {
   text-align: center;
   padding: 2rem 0;
 }
 
-/* search*/
+/* title search*/
 
 /* Main content */
 .previews-container {
@@ -54,37 +93,45 @@ header {
   gap: 5rem;
 }
 
-/* .preview {
-  background-color: #b8b8b8;
-  padding: 2rem;
-  border-radius: 0.5rem;
-} */
-
 .preview-title {
-  font-weight: 800;
-  font-size: 1.6rem;
+  font-size: 2rem;
+  font-weight: 900;
   text-align: center;
   padding: 1rem 0 2rem 0;
 }
 
-.preview-cover-image-container {
+.preview-image-container {
+}
+
+.preview-image {
+  height: 20rem;
+  width: 15rem;
+  border-radius: 0.6rem;
+}
+
+.preview-info {
+  font-size: 1.2rem;
+  padding: 0 2.5rem;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
-.preview-cover-image {
-  height: 16rem;
-  width: 12rem;
+
+.preview-genres {
+  gap: 1rem;
+}
+.preview-seasons {
+}
+
+.preview-button-container {
+}
+
+.preview-button {
 }
 
 /* Show Overlay*/
 
-.image {
-  border-radius: 0.5rem;
-  box-shadow: -9px 5px 27px -6px rgba(12, 112, 117, 0.75);
-}
+/* Episode Overlay*/
 
-.image:hover {
-  transform: scale(1.05);
-  box-shadow: none;
-}
+/* Favourites */

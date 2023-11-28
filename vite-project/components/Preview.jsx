@@ -1,33 +1,42 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Card, Button, Chip } from "@mui/material";
 import styled from "@emotion/styled";
 
 const StyledCard = styled(Card)`
   && {
+    color: #999999;
     background-color: #05161a;
-    padding: 0.4rem 0.8rem;
+    padding: 0.6rem 0.8rem 1.6rem 0.8rem;
     border-radius: 1rem;
-    color: #f7f7f7;
-  }
-  &:hover {
-    transform: scale(1.05);
+    box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 `;
 
 const StyledChip = styled(Chip)`
   && {
-    padding: 0.1rem 0.2rem;
-    background-color: #294d61;
-    color: #ffffff;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding: 0.2rem 0.4rem;
+    color: #05161a;
+    background-color: #999999;
   }
 `;
 
 const StyledButton = styled(Button)`
   && {
-    background-color: #0c7075;
-    padding: 0.2rem 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #a9a9a9;
+    padding: 0.6rem 2rem;
+    background-color: #072e33;
+    box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
   }
 
   &:hover {
@@ -50,12 +59,27 @@ function Preview(props) {
     9: "Kids and Family",
   };
 
+  const monthMatch = {
+    1: "January",
+    2: "Feburary",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December",
+  };
+
   const date = new Date(props.podcastData.updated);
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  const lastUpdated = `${day} / ${month} / ${year}`;
+  const lastUpdated = `${day} ${monthMatch[month]} ${year}`;
 
   const genreMap = props.podcastData.genres.map((genre) => {
     return (
@@ -69,37 +93,31 @@ function Preview(props) {
   return (
     <StyledCard>
       <p className="preview-title">{props.podcastData.title}</p>
-      <div className="preview-cover-image-container">
+      <div className="preview-image-container flex-column">
         <img
-          className="preview-cover-image image"
+          className="preview-image image"
           src={props.podcastData.image}
           alt="cover image"
         ></img>
       </div>
-      <div>
-        <div
-          className="preview-genres"
-          style={{ display: "flex", gap: "1rem" }}
-        >
-          {genreMap}
-        </div>
+
+      <div className="preview-genres flex-column">{genreMap}</div>
+      <div className="preview-info">
+        <h4 className="preview-seasons">
+          {`${props.podcastData.seasons} ${
+            props.podcastData.seasons > 1 ? "SEASONS" : "SEASON"
+          }`}
+        </h4>
+        <h4>Updated: {lastUpdated}</h4>
       </div>
-      <h4 className="preview-seasons">Seasons: {props.podcastData.seasons}</h4>
-      <h4>Last Updated: {lastUpdated}</h4>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: "3rem",
-        }}
-      >
-        <NavLink
-          to={`/show/${props.podcastData.id}`}
-          style={{ textDecoration: "none" }}
-        >
-          <StyledButton variant="contained" size="small">
-            See details
+      <div className="preview-button-container flex-column">
+        <NavLink className="link" to={`/show/${props.podcastData.id}`}>
+          <StyledButton
+            className="preview-button"
+            variant="contained"
+            size="small"
+          >
+            See show details
           </StyledButton>
         </NavLink>
       </div>
