@@ -7,7 +7,7 @@ const StyledCard = styled(Card)`
   && {
     color: #999999;
     background-color: #05161a;
-    padding: 0.6rem 0.8rem 1.6rem 0.8rem;
+    padding: 0.4rem 0.6rem 0%.4 0.6rem;
     border-radius: 1rem;
     box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
 
@@ -19,7 +19,7 @@ const StyledCard = styled(Card)`
 
 const StyledChip = styled(Chip)`
   && {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 400;
     padding: 0.2rem 0.4rem;
     color: #05161a;
@@ -29,14 +29,16 @@ const StyledChip = styled(Chip)`
 
 const StyledButton = styled(Button)`
   && {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 400;
-    color: #a9a9a9;
+    color: #05161a;
     padding: 0.6rem 2rem;
-    background-color: #072e33;
+    margin-bottom: 2rem;
+    background-color: #6da5c0;
     box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
     -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
     -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    border-radius: 1rem;
   }
 
   &:hover {
@@ -92,7 +94,7 @@ function Preview(props) {
 
   return (
     <StyledCard>
-      <p className="preview-title">{props.podcastData.title}</p>
+      <p className="preview-title title">{props.podcastData.title}</p>
       <div className="preview-image-container flex-column">
         <img
           className="preview-image image"
@@ -101,7 +103,7 @@ function Preview(props) {
         ></img>
       </div>
 
-      <div className="preview-genres flex-column">{genreMap}</div>
+      <div className="preview-genres">{genreMap}</div>
       <div className="preview-info">
         <h4 className="preview-seasons">
           {`${props.podcastData.seasons} ${
@@ -111,7 +113,11 @@ function Preview(props) {
         <h4>Updated: {lastUpdated}</h4>
       </div>
       <div className="preview-button-container flex-column">
-        <NavLink className="link" to={`/show/${props.podcastData.id}`}>
+        <NavLink
+          className="link"
+          style={{}}
+          to={`/show/${props.podcastData.id}`}
+        >
           <StyledButton
             className="preview-button"
             variant="contained"

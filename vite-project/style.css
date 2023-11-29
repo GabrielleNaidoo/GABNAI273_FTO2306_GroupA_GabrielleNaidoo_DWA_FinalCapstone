@@ -6,11 +6,13 @@ colors:
 #0f969c
 #6da5c0
 #294d61
+grey: #999999;
+lighter-grey:#a9a9a9
 */
 
 body {
   background-color: #072e33;
-  color: #ffffff;
+  color: #a9a9a9;
   scroll-behavior: smooth;
   position: relative;
   font-family: "Lato", sans-serif;
@@ -20,12 +22,14 @@ body {
 
 .flex-column {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .link {
   text-decoration: none;
+  color: #05161a;
 }
 
 .image:hover {
@@ -33,12 +37,18 @@ body {
 }
 
 /* Carousel: */
-.carousel-container {
+.carousel-content {
+  margin: 15rem 0;
+}
+
+.carousel-text {
+  font-size: 2rem;
 }
 
 .carousel-image {
-  width: 25rem;
-  height: 33.33rem;
+  width: 18.75rem;
+  height: 25rem;
+  box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
 }
 
 .carousel-text {
@@ -60,10 +70,39 @@ body {
 }
 
 /* Header */
-header {
+
+/* website name and navbar */
+nav {
   display: flex;
-  align-content: center;
   justify-content: space-between;
+  align-items: center;
+  background-color: #05161a;
+
+  width: 100vw;
+  height: 8rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  opacity: 0.7;
+}
+
+.name {
+  font-family: "Dancing Script", sans-serif;
+  font-weight: bold;
+  color: #a9a9a9;
+  font-size: 5rem;
+  padding-left: 1rem;
+}
+
+.p {
+  color: #6da5c0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding-right: 2rem;
 }
 
 /* entire filter-bar */
@@ -90,11 +129,11 @@ header {
   padding: 3rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 5rem;
+  gap: 3rem;
 }
 
 .preview-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 900;
   text-align: center;
   padding: 1rem 0 2rem 0;
@@ -104,22 +143,25 @@ header {
 }
 
 .preview-image {
-  height: 20rem;
-  width: 15rem;
+  height: 16rem;
+  width: 12rem;
   border-radius: 0.6rem;
 }
 
 .preview-info {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   padding: 0 2.5rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .preview-genres {
-  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
 }
 .preview-seasons {
 }
@@ -132,6 +174,96 @@ header {
 
 /* Show Overlay*/
 
+.show {
+}
+
+.seasons-container {
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.season-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.season-cover-image {
+  height: 16rem;
+  width: 12rem;
+  border-radius: 0.6rem;
+}
+
+.season-episode-number {
+  font-size: 1.2rem;
+}
+
+.season-button {
+}
+
+.back-to-shows {
+  width: 1rem;
+  height: 1rem;
+}
+
 /* Episode Overlay*/
+.episode-page-title {
+  text-align: center;
+  margin-top: 5rem;
+}
+.episodes-container {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  margin: 5rem 0;
+}
+.episode-title {
+  font-size: 1.5rem;
+}
+.episode-image {
+  height: 14rem;
+  width: 10.5rem;
+  border-radius: 0.6rem;
+}
+
+.episode-description {
+  text-align: center;
+  padding: 0 1rem;
+}
+.episode-button-container {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
 
 /* Favourites */
+.episode-favourite-image {
+  filter: contrast(0);
+  height: 3rem;
+  width: 3rem;
+}
+
+/*extra*/
+.back-to-top-button {
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid black;
+  border-radius: 100%;
+  background-color: #6da5c0;
+  opacity: 0.5;
+
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+}
+
+.back-to-top {
+  height: 3.5rem;
+  width: 3rem;
+  stroke: #072e33;
+  opacity: 0.5;
+}

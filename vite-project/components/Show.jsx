@@ -1,5 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { Card, Button } from "@mui/material";
+import styled from "@emotion/styled";
+
+const StyledButton = styled(Button)`
+  && {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #05161a;
+    padding: 0.6rem 2rem;
+    margin-bottom: 2rem;
+    background-color: #6da5c0;
+    box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    border-radius: 1rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0f969c;
+  }
+`;
+
+const StyledCard = styled(Card)`
+  && {
+    color: #999999;
+    background-color: #05161a;
+    padding: 1.5rem 3rem;
+    border-radius: 1rem;
+    box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+`;
 
 function Show() {
   const { id } = useParams();
@@ -42,23 +79,45 @@ function Show() {
       // console.log(season.episodes);
       return (
         <div key={season.season}>
-          <h1>{season.title}</h1>
-          <img
-            src={season.image}
-            alt="season-cover-image"
-            style={{ width: "6rem", height: "10rem" }}
-          ></img>
-          <p>Episodes: {season.episodes.length}</p>
-          <button onClick={() => handleSeasonButtonClick(season)}>
-            SEE EPISODES
-          </button>
+          <StyledCard>
+            <h1 className="season-title">{season.title}</h1>
+            <img
+              className="season-cover-image image"
+              src={season.image}
+              alt="season-cover-image"
+            ></img>
+            <p className="season-episode-number">
+              Episodes: {season.episodes.length}
+            </p>
+            <StyledButton
+              className="season-button"
+              onClick={() => handleSeasonButtonClick(season)}
+            >
+              SEE EPISODES
+            </StyledButton>
+          </StyledCard>
         </div>
       );
     });
 
   return (
     <div className="show">
-      <button onClick={handleClickBack}>Back to List</button>
+      <StyledButton onClick={handleClickBack}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="back-to-shows"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+          />
+        </svg>
+      </StyledButton>
       <h1>{showData.title}</h1>
       <img
         className="show-cover-image"
@@ -74,7 +133,7 @@ function Show() {
         style={{ width: "6rem", height: "10rem" }}
       ></img>
       <p>{showData.description}</p>
-      <div className="seasons">{seasonDetails}</div>
+      <div className="seasons-container">{seasonDetails}</div>
     </div>
   );
 }

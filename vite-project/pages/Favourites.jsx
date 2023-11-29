@@ -182,6 +182,7 @@ function Favourites() {
           </div>
 
           <img
+            className="episode-favourite-image image"
             onClick={() => toggleFavouritesHandler(favourite)}
             src={
               favouritesCtx.isFavourite(favourite.title)

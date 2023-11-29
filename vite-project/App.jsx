@@ -10,7 +10,29 @@ import Dropdown from "/components/Dropdown";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
 import AudioPlayer from "/components/AudioPlayer";
-import { supabase } from "./supabaseClient";
+import { Button, Badge } from "@mui/material";
+import styled from "@emotion/styled";
+// import { supabase } from "./supabaseClient";
+
+const StyledButton = styled(Button)`
+  && {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #05161a;
+    padding: 0.5rem 3rem;
+    margin-bottom: 2rem;
+    background-color: #6da5c0;
+    box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    border-radius: 1rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0f969c;
+  }
+`;
 
 export function App() {
   const [podcastData, setPodcastData] = useState([]);
@@ -25,6 +47,13 @@ export function App() {
   function handleChange(event) {
     const { value, name } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function scrollToTopHandler() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   useEffect(() => {
@@ -120,32 +149,44 @@ export function App() {
 
   return (
     <>
-      <header>
-        <h1 className="name">PodPortal</h1>
-        <div
-          className="nav-links"
-          style={{
-            display: "flex",
-            alignContent: "center",
-            justifyContent: "center",
-            gap: "4rem",
-          }}
-        >
+      <nav>
+        <p className="name">
+          <span className="p">P</span>od<span className="p">P</span>ortal
+        </p>
+        <div className="navbar">
           <NavLink className="link" to="/">
-            <h1>Podcasts</h1>
+            <StyledButton>Podcasts</StyledButton>
           </NavLink>
           <NavLink className="link" to="/favourites">
-            <h1>
-              Favourites:
-              <span style={{ color: "red" }}>
-                {favouritesCtx.totalFavourites}
-              </span>
-            </h1>
+            <StyledButton>
+              <Badge
+                badgeContent={favouritesCtx.totalFavourites}
+                color="success"
+              >
+                Favourites
+              </Badge>
+            </StyledButton>
           </NavLink>
         </div>
-      </header>
+      </nav>
+
       <AudioPlayer />
-      <div>Back to top arrow(sticky)</div>
+      <button onClick={scrollToTopHandler} className="back-to-top-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="back-to-top"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
+          />
+        </svg>
+      </button>
 
       <Routes>
         {/* <Route path="/loginPage" element={Login}></Route> */}
