@@ -10,9 +10,7 @@ import Dropdown from "/components/Dropdown";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
 import AudioPlayer from "/components/AudioPlayer";
-// import { createClient } from "@supabase/supabase-js";
-// import { Auth } from "@supabase/auth-ui-react";
-// import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { supabase } from "./supabaseClient";
 
 export function App() {
   const [podcastData, setPodcastData] = useState([]);
