@@ -37,6 +37,7 @@ const StyledCard = styled(Card)`
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
+    height: 100%;
   }
 `;
 
