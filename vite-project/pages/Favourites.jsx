@@ -77,6 +77,7 @@ function Favourites() {
     }
 
     // Allows you to fetch the current updateFavourites without having infinite loop due to favourites constantly changing(useEffect dependency)
+
     let updatedFavourites = [...favouritesCtx.favourites];
 
     if (formData.selectedValueFilter === "reverse-alphabetical") {
@@ -116,10 +117,18 @@ function Favourites() {
 
   const favouriteItems = favourites.map((favourite) => {
     const show = favourite.showMatch[0];
-    const date = `${favourite.dateAdded.getDate()}/${
-      favourite.dateAdded.getMonth() + 1
-    }/${favourite.dateAdded.getFullYear()}`;
-    const time = `${favourite.dateAdded.getHours()}:${favourite.dateAdded.getMinutes()}`;
+
+    const date =
+      favourite.dateAdded instanceof Date
+        ? `${favourite.dateAdded.getDate()}/${
+            favourite.dateAdded.getMonth() + 1
+          }/${favourite.dateAdded.getFullYear()}`
+        : "";
+
+    const time =
+      favourite.dateAdded instanceof Date
+        ? `${favourite.dateAdded.getHours()}:${favourite.dateAdded.getMinutes()}`
+        : "";
 
     const genreTitle = {
       0: "All",
@@ -213,11 +222,11 @@ function Favourites() {
           <Dropdown data={formData} changeHandler={handleChange} />
         </div>
       </div>
-      <h1
-        style={{ textAlign: "center", marginTop: "5rem", marginBottom: "5rem" }}
-      >
-        Your favourites
-      </h1>
+      <div>
+        <h1>Your favourites</h1>
+        <button onClick={favouritesCtx.clearFavourites}>Clear All</button>
+      </div>
+
       <div style={{ display: "flex", gap: "5rem", padding: "4rem 2rem" }}>
         {favouriteItems}
       </div>

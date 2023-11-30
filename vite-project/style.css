@@ -36,6 +36,35 @@ body {
   transform: scale(1.05);
 }
 
+/* Login and signup forms */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.greeting {
+  text-align: center;
+  margin-top: 6rem;
+}
+
+.alternate-authentication {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 1.2rem;
+}
+
 /* Carousel: */
 .carousel-content {
   margin: 15rem 0;
@@ -266,4 +295,9 @@ nav {
   width: 3rem;
   stroke: #072e33;
   opacity: 0.5;
+}
+
+.loading {
+  font-size: 8rem;
+  text-align: center;
 }

@@ -39,6 +39,7 @@ const StyledButton = styled(Button)`
     -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
     -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
     border-radius: 1rem;
+    letter-spacing: 0.04rem;
   }
 
   &:hover {

@@ -12,7 +12,9 @@ import SearchBox from "/components/SearchBox";
 import AudioPlayer from "/components/AudioPlayer";
 import { Button, Badge } from "@mui/material";
 import styled from "@emotion/styled";
-// import { supabase } from "./supabaseClient";
+import Login from "/pages/Login.jsx";
+import Signup from "/pages/SignUp.jsx";
+import LandingPage from "/pages/Landingpage";
 
 const StyledButton = styled(Button)`
   && {
@@ -35,12 +37,27 @@ const StyledButton = styled(Button)`
 `;
 
 export function App() {
+  const [token, setToken] = useState(false);
+
+  if (token) {
+    sessionStorage.setItem("token", JSON.stringify(token));
+  }
+  useEffect(() => {
+    const storedToken = sessionStorage.getItem("token");
+    if (storedToken) {
+      let data = JSON.parse(storedToken);
+      setToken(data);
+    }
+  }, []);
+
   const [podcastData, setPodcastData] = useState([]);
   const [formData, setFormData] = useState({
     selectedValueFilter: "alphabetical",
     selectedGenreFilter: "all",
     titleInput: "",
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [showSignup, setShowSignup] = useState(true);
 
   const favouritesCtx = useContext(FavouritesContext);
 
@@ -55,6 +72,10 @@ export function App() {
       behavior: "smooth",
     });
   }
+
+  const toggleForm = () => {
+    setShowSignup((prevShowSignup) => !prevShowSignup);
+  };
 
   useEffect(() => {
     function handleGenre(array) {
@@ -95,6 +116,7 @@ export function App() {
       return filteredTitleArray;
     }
 
+    setIsLoading(true);
     fetch("https://podcast-api.netlify.app/shows")
       .then((res) => {
         if (!res.ok) {
@@ -129,14 +151,15 @@ export function App() {
             a.title.toLowerCase().localeCompare(b.title.toLowerCase())
           );
           setPodcastData(handleGenre(handleTitle(alphabeticalPodcastData)));
+          setIsLoading(false);
         }
       })
       .catch((err) => console.log(err));
+    setIsLoading(false);
   }, [
     formData.selectedValueFilter,
     formData.selectedGenreFilter,
     formData.titleInput,
-    podcastData,
   ]);
 
   const podcastElement = podcastData.map((element) => {
@@ -149,66 +172,88 @@ export function App() {
 
   return (
     <>
-      <nav>
-        <p className="name">
-          <span className="p">P</span>od<span className="p">P</span>ortal
-        </p>
-        <div className="navbar">
-          <NavLink className="link" to="/">
-            <StyledButton>Podcasts</StyledButton>
-          </NavLink>
-          <NavLink className="link" to="/favourites">
-            <StyledButton>
-              <Badge
-                badgeContent={favouritesCtx.totalFavourites}
-                color="success"
-              >
-                Favourites
-              </Badge>
-            </StyledButton>
-          </NavLink>
-        </div>
-      </nav>
-
-      <AudioPlayer />
-      <button onClick={scrollToTopHandler} className="back-to-top-button">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="back-to-top"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
-          />
-        </svg>
-      </button>
-
+      {token && (
+        <>
+          <nav>
+            <p className="name">
+              <span className="p">P</span>od<span className="p">P</span>ortal
+            </p>
+            <div className="navbar">
+              <NavLink className="link" to="/">
+                <StyledButton>Podcasts</StyledButton>
+              </NavLink>
+              <NavLink className="link" to="/favourites">
+                <StyledButton>
+                  <Badge
+                    badgeContent={favouritesCtx.totalFavourites}
+                    color="success"
+                  >
+                    Favourites
+                  </Badge>
+                </StyledButton>
+              </NavLink>
+            </div>
+          </nav>
+          <AudioPlayer />
+          <button onClick={scrollToTopHandler} className="back-to-top-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="back-to-top"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
+              />
+            </svg>
+          </button>
+        </>
+      )}
       <Routes>
-        {/* <Route path="/loginPage" element={Login}></Route> */}
+        <Route
+          path="/signup"
+          element={<Signup setToken={setToken} toggleForm={toggleForm} />}
+        />
+        <Route
+          path="/login"
+          element={<Login setToken={setToken} toggleForm={toggleForm} />}
+        />
+
         <Route
           path="/"
           element={
             <>
-              <Carousel data={podcastData} />
-              <div className="filter-bar">
+              {!token && <Signup />}
+              {token && (
                 <div>
-                  <h2>
-                    <SearchBox data={formData} changeHandler={handleChange} />
-                  </h2>
+                  <Carousel data={podcastData} />
+                  <div className="filter-bar">
+                    <div>
+                      <h2>
+                        <SearchBox
+                          data={formData}
+                          changeHandler={handleChange}
+                        />
+                      </h2>
+                    </div>
+                    <div>
+                      <GenreDropdown
+                        data={formData}
+                        changeHandler={handleChange}
+                      />
+                    </div>
+                    <div>
+                      <Dropdown data={formData} changeHandler={handleChange} />
+                    </div>
+                  </div>
+                  {isLoading && <p className="loading">Loading...</p>}
+                  <div className="previews-container">{podcastElement}</div>
                 </div>
-                <div>
-                  <GenreDropdown data={formData} changeHandler={handleChange} />
-                </div>
-                <div>
-                  <Dropdown data={formData} changeHandler={handleChange} />
-                </div>
-              </div>
-              <div className="previews-container">{podcastElement}</div>
+              )}
             </>
           }
         />
@@ -224,37 +269,3 @@ export function App() {
 }
 
 export default App;
-
-// const supabase = createClient(
-//   "https://pboftvcxrpbbdjawbkrc.supabase.co",
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBib2Z0dmN4cnBiYmRqYXdia3JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDExMDEzODYsImV4cCI6MjAxNjY3NzM4Nn0.COmlMAs-G2q9hXHptorFA0Pasuw_vZMosXoYiAq9WDk"
-// );
-
-// export function Login() {
-//   const [session, setSession] = useState(null);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     supabase.auth.getSession().then(({ data: { session } }) => {
-//       setSession(session);
-//     });
-
-//     const {
-//       data: { subscription },
-//     } = supabase.auth.onAuthStateChange((_event, session) => {
-//       setSession(session);
-//     });
-
-//     if (session) {
-//       navigate("/");
-//     }
-
-//     return () => subscription.unsubscribe();
-//   }, [navigate, session]);
-
-//   if (!session) {
-//     return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
-//   }
-
-//   return null;
-// }

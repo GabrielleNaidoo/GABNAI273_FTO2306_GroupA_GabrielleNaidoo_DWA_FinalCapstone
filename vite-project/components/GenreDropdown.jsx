@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Preview from "./Preview";
+import { Select } from "@mui/material";
+import styled from "@emotion/styled";
 
 function GenreDropdown(props) {
   return (
@@ -39,11 +41,3 @@ function GenreDropdown(props) {
 }
 
 export default GenreDropdown;
-
-// const podcastElement = podcastData.map((element) => {
-//   return (
-//     <div key={element.id}>
-//       <Preview podcastData={element} />
-//     </div>
-//   );
-// });

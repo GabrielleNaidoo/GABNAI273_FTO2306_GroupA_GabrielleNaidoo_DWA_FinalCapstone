@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+import Login from "/pages/Login.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { FavouritesContextProvider } from "./store/favourites-context";
 import { AudioContextProvider } from "./store/audio-context";

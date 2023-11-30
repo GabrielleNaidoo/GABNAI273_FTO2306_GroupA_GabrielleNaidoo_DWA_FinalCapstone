@@ -15,6 +15,7 @@ const StyledButton = styled(Button)`
     -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
     -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
     border-radius: 1rem;
+    letter-spacing: 0.04rem;
   }
 
   &:hover {
@@ -43,8 +44,10 @@ function Show() {
   const navigate = useNavigate();
   const [currentId, setCurrentId] = useState(id);
   const [showData, setShowData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`https://podcast-api.netlify.app/id/${currentId}`)
       .then((res) => {
         if (!res.ok) {
@@ -54,8 +57,12 @@ function Show() {
       })
       .then((data) => {
         setShowData({ ...data });
+        setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
   }, [currentId]);
 
   function handleSeasonButtonClick(season) {
@@ -118,6 +125,7 @@ function Show() {
           />
         </svg>
       </StyledButton>
+      {isLoading && <p className="loading">Loading...</p>}
       <h1>{showData.title}</h1>
       <img
         className="show-cover-image"

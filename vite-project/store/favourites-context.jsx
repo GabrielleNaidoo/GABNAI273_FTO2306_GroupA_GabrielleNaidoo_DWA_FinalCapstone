@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const FavouritesContext = createContext({
   favourites: [],
@@ -6,6 +6,7 @@ const FavouritesContext = createContext({
   addFavourite: (favouriteEpisode) => {},
   removeFavourite: (favouriteEpisodeTitle) => {},
   isFavourite: (favouriteEpisodeTitle) => {},
+  clearFavourites: () => {},
   currentAudioFile: "",
 });
 
@@ -29,12 +30,29 @@ export function FavouritesContextProvider(props) {
       (episode) => episode.title === favouriteEpisodeTitle
     );
   }
+  function clearAllFavouritesHandler() {
+    localStorage.removeItem("favourites");
+    setUserFavourites([]);
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("favourites")) {
+      const storedFavourites =
+        JSON.parse(localStorage.getItem("favourites")) || [];
+      setUserFavourites(storedFavourites);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(userFavourites));
+  }, [userFavourites]);
 
   const context = {
     favourites: userFavourites,
     totalFavourites: userFavourites.length,
     addFavourite: addFavouriteHandler,
     removeFavourite: removeFavouriteHandler,
+    clearFavourites: clearAllFavouritesHandler,
     isFavourite: isFavouriteHandler,
     currentAudioFile: "",
   };

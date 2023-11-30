@@ -4,24 +4,21 @@ import AudioContext from "../store/audio-context";
 
 function AudioPlayer() {
   const AudioCtx = useContext(AudioContext);
-  // const isAudioPlaying = Boolean(AudioCtx.currentAudioFile);
+  const rapRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     if (isAudioPlaying) {
-  //       const message =
-  //         "Are you sure you want to leave? Your audio is still playing.";
-  //       event.returnValue = message; // Standard for most browsers
-  //       return message; // For some older browsers
-  //     }
-  //   };
+  function playHandler() {
+    setIsPlaying(true);
+  }
 
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [isAudioPlaying]);
+  const handleBeforeUnload = (event) => {
+    if (isPlaying) {
+      event.returnValue = prompt();
+      ("Are you sure you want to leave? Your audio is still playing.");
+    }
+    console.log(event.returnValue);
+  };
+  window.addEventListener("beforeunload", handleBeforeUnload);
 
   return (
     <div>
@@ -33,9 +30,34 @@ function AudioPlayer() {
         src={AudioCtx.currentAudioFile}
         autoPlay
         controls
+        // onListen={handleListen}
+        // onPause={handlePause}
+        // onPlay={handlePlay}
+        onPlay={playHandler}
+        listenInterval={1000}
+        ref={rapRef}
       />
     </div>
   );
 }
 
 export default AudioPlayer;
+
+// const isAudioPlaying = Boolean(AudioCtx.currentAudioFile);
+
+// useEffect(() => {
+//   const handleBeforeUnload = (event) => {
+//     if (isAudioPlaying) {
+//       const message =
+//         "Are you sure you want to leave? Your audio is still playing.";
+//       event.returnValue = message; // Standard for most browsers
+//       return message; // For some older browsers
+//     }
+//   };
+
+//   window.addEventListener("beforeunload", handleBeforeUnload);
+
+//   return () => {
+//     window.removeEventListener("beforeunload", handleBeforeUnload);
+//   };
+// }, [isAudioPlaying]);
