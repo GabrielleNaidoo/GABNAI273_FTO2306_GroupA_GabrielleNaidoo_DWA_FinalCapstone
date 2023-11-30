@@ -7,4 +7,4 @@ Instructions: In order to benefit from the code that I have written, you can cli
 
 Features: This project is a Wep App called PodPortal that allows a user to search through a list of podcasts and filter it by specific title or genre. Users can also sort podcasts into alphabetical, reverse alphabetical, newest to oldest, and oldest to newest order. Users are able to add specific podcast episodes to their favourites list which is stored in Local storage, and will therefore remain if they leave the Page or refresh it. They can view htese favourites on a favourites page. They are also able to listen to podcasts while browsing via a global audioplayer. 
 
-Technologies used: JavaScript, React,React Router DOM, React Audio Player Framework, SupaBase,, MUI Components,VS Code, Git, and GitHub.
+Technologies used: JavaScript, React,React Router DOM, React Audio Player Framework, SupaBase,, MUI Components,VS Code, Node Package Manager,Git, and GitHub.
