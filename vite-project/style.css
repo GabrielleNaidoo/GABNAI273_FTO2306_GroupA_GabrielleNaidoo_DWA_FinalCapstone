@@ -111,8 +111,9 @@ nav {
   height: 8rem;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 10000;
   opacity: 0.7;
+  margin-bottom: 2rem;
 }
 
 .name {
@@ -136,23 +137,49 @@ nav {
 
 /* entire filter-bar */
 .filter-bar {
-  height: 4rem;
-  background-color: rgb(226, 73, 73);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  width: 100vw;
+  height: 6rem;
+  border: 0.2rem solid #05161a;
+  background-color: #6da5c0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4rem;
+  align-content: center;
+  margin: 6rem 0;
+  opacity: 0.75;
+}
+
+.filter-bar-label {
+  color: #05161a;
+  font-size: 1.8rem;
+  font-family: "Dancing Script", sans-serif;
 }
 
 /* order sorting */
+.dropdown-order {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
 
 /*genre dropdown*/
-.genre-title {
-  text-align: center;
-  padding: 2rem 0;
+.dropdown-genre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 /* title search*/
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
 
+/******************************************************************************************************************/
 /* Main content */
 .previews-container {
   padding: 3rem;
@@ -206,6 +233,56 @@ nav {
 .show {
 }
 
+.show-relative-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #05161a;
+  width: 100vw;
+  height: 60vh;
+}
+
+.show-title {
+  /* font-family: "Dancing Script", sans-serif; */
+  font-size: 5rem;
+  position: absolute;
+  z-index: 100;
+  bottom: 70%;
+  color: #a9a9a9;
+  filter: brightness(2);
+  font-family: "Dancing Script", sans-serif;
+}
+
+.show-cover-image-blurred {
+  width: 80vw;
+  height: 100%;
+  filter: blur(10px);
+  opacity: 0.5;
+}
+
+.show-cover-image {
+  height: 25rem;
+  width: 18.75rem;
+  position: absolute;
+  z-index: 100;
+  bottom: 0;
+}
+
+.show-description-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 8rem;
+  margin: 2rem 0;
+}
+
+.show-description {
+  color: #a9a9a9;
+  filter: brightness(2);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 .seasons-container {
   padding: 3rem;
   display: grid;
@@ -240,39 +317,51 @@ nav {
 /* Episode Overlay*/
 .episode-page-title {
   text-align: center;
-  margin-top: 5rem;
+  margin: 5rem 0;
+  font-size: 5rem;
+  color: #a9a9a9;
+  filter: brightness(2);
+  font-family: "Dancing Script", sans-serif;
 }
+
 .episodes-container {
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 3rem;
-  margin: 5rem 0;
+  gap: 4rem;
 }
+
 .episode-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
 }
+
 .episode-image {
-  height: 14rem;
-  width: 10.5rem;
+  height: 16rem;
+  width: 12rem;
   border-radius: 0.6rem;
+  margin-top: 1.5rem;
 }
 
 .episode-description {
   text-align: center;
-  padding: 0 1rem;
-}
-.episode-button-container {
-  display: flex;
-  align-items: center;
-  gap: 6rem;
+  padding: 0 0.2rem;
+  height: 100%;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
 }
 
 /* Favourites */
+.favourite-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 .episode-favourite-image {
   filter: contrast(0);
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
 }
 
 /*extra*/
@@ -300,4 +389,9 @@ nav {
 .loading {
   font-size: 8rem;
   text-align: center;
+}
+
+/*Audio Player*/
+.audio-player {
+  position: absolute;
 }

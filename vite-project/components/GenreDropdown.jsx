@@ -1,41 +1,46 @@
 import React, { useState } from "react";
 import Preview from "./Preview";
-import { Select } from "@mui/material";
+import { Select, MenuItem } from "@mui/material";
 import styled from "@emotion/styled";
+
+const StyledSelect = styled(Select)`
+  && {
+    color: #05161a;
+    width: 10rem;
+  }
+`;
+const StyledMenuItem = styled(MenuItem)`
+  && {
+    color: #05161a;
+  }
+`;
 
 function GenreDropdown(props) {
   return (
-    <div className="dropdown-genre-page">
-      <label
-        htmlFor="selectedGenre"
-        style={{ marginRight: "1rem", fontSize: "1.5rem" }}
-      >
+    <div className="dropdown-genre">
+      <label htmlFor="selectedGenre" className="filter-bar-label">
         Genre:
       </label>
-      <select
+      <StyledSelect
         id="selectedGenre"
         value={props.data.selectedGenreFilter}
         onChange={props.changeHandler}
         name="selectedGenreFilter"
-        style={{
-          fontSize: "1rem",
-          textAlign: "center",
-        }}
       >
-        <option value="all">All</option>
-        <option value="personalGrowth">Personal Growth</option>
-        <option value="trueCrimeAndInvestigativeJournalism">
+        <StyledMenuItem value="all">All</StyledMenuItem>
+        <StyledMenuItem value="personalGrowth">Personal Growth</StyledMenuItem>
+        <StyledMenuItem value="trueCrimeAndInvestigativeJournalism">
           True Crime and Investigative Journalism
-        </option>
-        <option value="history">History</option>
+        </StyledMenuItem>
+        <StyledMenuItem value="history">History</StyledMenuItem>
 
-        <option value="comedy">Comedy</option>
-        <option value="entertainment">Entertainment</option>
-        <option value="business">Business</option>
-        <option value="fiction">Fiction</option>
-        <option value="news">News</option>
-        <option value="kidsAndFamily">Kids and Family</option>
-      </select>
+        <StyledMenuItem value="comedy">Comedy</StyledMenuItem>
+        <StyledMenuItem value="entertainment">Entertainment</StyledMenuItem>
+        <StyledMenuItem value="business">Business</StyledMenuItem>
+        <StyledMenuItem value="fiction">Fiction</StyledMenuItem>
+        <StyledMenuItem value="news">News</StyledMenuItem>
+        <StyledMenuItem value="kidsAndFamily">Kids and Family</StyledMenuItem>
+      </StyledSelect>
     </div>
   );
 }

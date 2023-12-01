@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { TextField } from "@mui/material";
+import styled from "@emotion/styled";
+
+const StyledTextField = styled(TextField)`
+  && {
+    color: #05161a;
+    width: 10rem;
+  }
+`;
 
 function SearchBox(props) {
   return (
     <div className="search-bar">
-      <label
-        htmlFor="titleInput"
-        style={{ marginRight: "1rem", fontSize: "1.5rem" }}
-      >
-        {" "}
-        Find podcast:{" "}
+      <label htmlFor="titleInput" className="filter-bar-label">
+        Search Titles
       </label>
-      <input
+      <StyledTextField
         id="titleInput"
         type="text"
         name="titleInput"
         value={props.data.titleInput}
         onChange={props.changeHandler}
         placeholder="Title"
-        style={{
-          fontSize: "1.2rem",
-          textAlign: "center",
-        }}
       />
     </div>
   );

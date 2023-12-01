@@ -21,7 +21,7 @@ function AudioPlayer() {
   window.addEventListener("beforeunload", handleBeforeUnload);
 
   return (
-    <div>
+    <div className="audio-player">
       {AudioCtx.currentAudioFile && (
         <p>{`Episode ${AudioCtx.currentEpisode}: ${AudioCtx.currentEpisodeTitle}`}</p>
       )}

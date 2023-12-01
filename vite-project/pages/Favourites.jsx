@@ -145,16 +145,7 @@ function Favourites() {
 
     const genreMap = show.genres.map((genre) => {
       return (
-        <li
-          key={genre}
-          style={{
-            backgroundColor: "#F8F8F8",
-            marginBottom: "1rem",
-            display: "inline-block",
-            listStyle: "none",
-            padding: "0.25rem 0.5rem",
-          }}
-        >
+        <li key={genre}>
           <div className="genre-list-item-text-container">
             {genreTitle[genre]}
           </div>
@@ -163,18 +154,8 @@ function Favourites() {
     });
 
     return (
-      <div
-        key={favourite.title}
-        style={{
-          backgroundColor: "purple",
-          padding: "1rem 2rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          width: "15rem",
-        }}
-      >
-        <p style={{ color: "orange" }}>
+      <div key={favourite.title}>
+        <p>
           Added: {date} {time}
         </p>
         <img
@@ -199,7 +180,6 @@ function Favourites() {
                 : "/images/heart-empty.png"
             }
             alt="favourite image"
-            style={{ height: "3rem", width: "3rem" }}
           ></img>
           <button onClick={() => handleClick(favourite)}>Listen</button>
         </div>
@@ -209,11 +189,11 @@ function Favourites() {
 
   return (
     <div>
-      <div className="filter-bar" style={{ backgroundColor: "green" }}>
+      <div className="filter-bar">
         <div>
-          <h2>
+          <div>
             <SearchBox data={formData} changeHandler={handleChange} />
-          </h2>
+          </div>
         </div>
         <div>
           <GenreDropdown data={formData} changeHandler={handleChange} />
@@ -227,9 +207,7 @@ function Favourites() {
         <button onClick={favouritesCtx.clearFavourites}>Clear All</button>
       </div>
 
-      <div style={{ display: "flex", gap: "5rem", padding: "4rem 2rem" }}>
-        {favouriteItems}
-      </div>
+      <div>{favouriteItems}</div>
     </div>
   );
 }

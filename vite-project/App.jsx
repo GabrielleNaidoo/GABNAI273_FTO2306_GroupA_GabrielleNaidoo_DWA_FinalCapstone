@@ -14,7 +14,6 @@ import { Button, Badge } from "@mui/material";
 import styled from "@emotion/styled";
 import Login from "/pages/Login.jsx";
 import Signup from "/pages/SignUp.jsx";
-import LandingPage from "/pages/Landingpage";
 
 const StyledButton = styled(Button)`
   && {
@@ -233,12 +232,12 @@ export function App() {
                   <Carousel data={podcastData} />
                   <div className="filter-bar">
                     <div>
-                      <h2>
+                      <div>
                         <SearchBox
                           data={formData}
                           changeHandler={handleChange}
                         />
-                      </h2>
+                      </div>
                     </div>
                     <div>
                       <GenreDropdown

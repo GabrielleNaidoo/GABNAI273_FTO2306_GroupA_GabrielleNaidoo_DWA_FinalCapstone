@@ -5,10 +5,10 @@ import styled from "@emotion/styled";
 
 const StyledButton = styled(Button)`
   && {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #05161a;
-    padding: 0.6rem 2rem;
+    padding: 0.8rem 2.4rem;
     margin-bottom: 2rem;
     background-color: #6da5c0;
     box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
@@ -109,6 +109,7 @@ function Show() {
 
   return (
     <div className="show">
+      {isLoading && <p className="loading">Loading...</p>}
       <StyledButton onClick={handleClickBack}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -125,22 +126,22 @@ function Show() {
           />
         </svg>
       </StyledButton>
-      {isLoading && <p className="loading">Loading...</p>}
-      <h1>{showData.title}</h1>
-      <img
-        className="show-cover-image"
-        src={showData.image}
-        alt="cover image of show"
-        style={{ width: "6rem", height: "10rem" }}
-      ></img>
-
-      <img
-        className="show-cover-image-blurred"
-        src={showData.image}
-        alt="blurred cover image of show"
-        style={{ width: "6rem", height: "10rem" }}
-      ></img>
-      <p>{showData.description}</p>
+      <div className="show-relative-container">
+        <h1 className="show-title">{showData.title}</h1>
+        <img
+          className="show-cover-image"
+          src={showData.image}
+          alt="cover image of show"
+        ></img>
+        <img
+          className="show-cover-image-blurred"
+          src={showData.image}
+          alt="blurred cover image of show"
+        ></img>
+      </div>
+      <div className="show-description-container">
+        <p className="show-description">{showData.description}</p>
+      </div>
       <div className="seasons-container">{seasonDetails}</div>
     </div>
   );

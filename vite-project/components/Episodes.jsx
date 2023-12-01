@@ -7,10 +7,10 @@ import styled from "@emotion/styled";
 
 const StyledButton = styled(Button)`
   && {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #05161a;
-    padding: 0.4rem 1.5rem;
+    padding: 0.8rem 2.4rem;
     margin-bottom: 2rem;
     background-color: #6da5c0;
     box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
@@ -28,16 +28,17 @@ const StyledButton = styled(Button)`
 
 const StyledCard = styled(Card)`
   && {
+    position: relative;
     color: #999999;
     background-color: #05161a;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 3rem;
     border-radius: 1rem;
     box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
     height: 100%;
   }
 `;
@@ -79,7 +80,7 @@ function Episodes(props) {
       <div key={episode.episode} id={episode.episode}>
         <StyledCard>
           <h1 className="episode-title">
-            <span>Episode {episode.episode}: </span>
+            <span> {episode.episode}. </span>
             {episode.title}
           </h1>
           <img
@@ -88,14 +89,13 @@ function Episodes(props) {
             alt={episode.title}
           ></img>
           <p className="episode-description">{episode.description}</p>
-
-          <div className="episode-button-container">
-            <StyledButton
-              className="episode-button"
-              onClick={() => handleClick(episode)}
-            >
-              Listen
-            </StyledButton>
+          <StyledButton
+            className="episode-button"
+            onClick={() => handleClick(episode)}
+          >
+            Listen
+          </StyledButton>
+          <div className="favourite-button">
             <img
               className="episode-favourite-image image"
               onClick={() => toggleFavouritesHandler(episode)}
