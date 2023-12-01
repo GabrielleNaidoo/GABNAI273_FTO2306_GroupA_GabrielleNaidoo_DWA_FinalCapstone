@@ -24,6 +24,13 @@ const StyledCarousel = styled(Slider)`
     width: 80vw;
     margin-top: 4rem;
   }
+
+  @media only screen and (min-width: 375px) and (max-width: 1000px) {
+    && {
+      display: none;
+      margin-top: 0;
+    }
+  }
 `;
 
 function CarouselComponent(props) {
@@ -34,7 +41,7 @@ function CarouselComponent(props) {
         src={props.carouselData.image}
         alt="cover image"
       ></img>
-      <div className="carousel-text">
+      <div className="carousel-text-inside">
         <h1 className="carousel-title title">{props.carouselData.title}</h1>
         <p className="carousel-description">{`${props.carouselData.description.slice(
           0,

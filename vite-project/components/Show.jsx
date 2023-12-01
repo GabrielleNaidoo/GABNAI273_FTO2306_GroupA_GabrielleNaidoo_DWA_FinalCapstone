@@ -22,6 +22,34 @@ const StyledButton = styled(Button)`
     transform: scale(1.1);
     background-color: #0f969c;
   }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 0.6rem;
+      padding: 0.2rem 1.2rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02rem;
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    && {
+      font-size: 0.7rem;
+      padding: 0.25rem 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+  }
+  @media screen and (min-width: 375px) and (max-width: 400px) {
+    && {
+      font-size: 0.5rem;
+
+      padding: 0.2rem 1rem;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 1200px) {
+    && {
+      font-size: 0.8rem;
+      padding: 0.4rem 1.2rem;
+    }
+  }
 `;
 
 const StyledCard = styled(Card)`
@@ -36,6 +64,18 @@ const StyledCard = styled(Card)`
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
+  }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      padding: 0.2rem 0.3rem;
+
+      gap: 1.5rem;
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    && {
+      gap: 1.7rem;
+    }
   }
 `;
 

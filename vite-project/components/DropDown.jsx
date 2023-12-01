@@ -6,6 +6,18 @@ const StyledSelect = styled(Select)`
   && {
     color: #05161a;
     width: 10rem;
+    background-color: #a9a9a9;
+  }
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  && {
+    color: #05161a;
+  }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -21,10 +33,14 @@ function Dropdown(props) {
         onChange={props.changeHandler}
         name="selectedValueFilter"
       >
-        <MenuItem value="alphabetical">A-Z</MenuItem>
-        <MenuItem value="reverse-alphabetical">Z-A</MenuItem>
-        <MenuItem value="newest-to-oldest">Newest to oldest</MenuItem>
-        <MenuItem value="oldest-to-newest">oldest to newest</MenuItem>
+        <StyledMenuItem value="alphabetical">A-Z</StyledMenuItem>
+        <StyledMenuItem value="reverse-alphabetical">Z-A</StyledMenuItem>
+        <StyledMenuItem value="newest-to-oldest">
+          Newest to oldest
+        </StyledMenuItem>
+        <StyledMenuItem value="oldest-to-newest">
+          oldest to newest
+        </StyledMenuItem>
       </StyledSelect>
     </div>
   );

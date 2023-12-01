@@ -23,6 +23,12 @@ const StyledButton = styled(Button)`
     transform: scale(1.1);
     background-color: #0f969c;
   }
+  @media screen and (min-width: 375px) and (max-width: 800px) {
+    && {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.6rem;
+    }
+  }
 `;
 
 const StyledButtonVariant = styled(Button)`
@@ -40,6 +46,13 @@ const StyledButtonVariant = styled(Button)`
   &:hover {
     transform: scale(1.1);
     background-color: #0f969c;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 800px) {
+    && {
+      padding: 0.1rem;
+      font-size: 0.6rem;
+    }
   }
 `;
 
@@ -65,6 +78,13 @@ const StyledCard = styled(Card)`
     margin: 10rem auto;
     width: 40rem;
     padding: 6rem 2rem;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 800px) {
+    && {
+      width: 20rem;
+      padding: 2.5rem 1rem;
+    }
   }
 `;
 

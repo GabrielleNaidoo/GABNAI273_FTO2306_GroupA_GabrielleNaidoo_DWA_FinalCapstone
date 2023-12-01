@@ -33,6 +33,21 @@ const StyledButton = styled(Button)`
     transform: scale(1.1);
     background-color: #0f969c;
   }
+
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 0.6rem;
+      padding: 0.1rem 1.2rem;
+      margin-bottom: 0.1rem;
+      letter-spacing: 0.03rem;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 1200) {
+    && {
+      font-size: 0.8rem;
+      padding: 0.1rem 1.2rem;
+    }
+  }
 `;
 
 export function App() {

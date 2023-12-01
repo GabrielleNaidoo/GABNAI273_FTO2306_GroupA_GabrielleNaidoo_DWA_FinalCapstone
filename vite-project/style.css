@@ -67,7 +67,7 @@ body {
 
 /* Carousel: */
 .carousel-content {
-  margin: 15rem 0;
+  margin: 10rem 0;
 }
 
 .carousel-text {
@@ -80,7 +80,7 @@ body {
   box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
 }
 
-.carousel-text {
+.carousel-text-inside {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -145,7 +145,7 @@ nav {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 4rem;
   align-content: center;
-  margin: 6rem 0;
+  margin: 8rem 0 6rem 0;
   opacity: 0.75;
 }
 
@@ -334,6 +334,7 @@ nav {
 .episode-title {
   font-size: 1.3rem;
   margin-top: 1.5rem;
+  text-align: center;
 }
 
 .episode-image {
@@ -352,6 +353,46 @@ nav {
 }
 
 /* Favourites */
+.favourite-page-title {
+  text-align: center;
+  margin: 5rem 0;
+  font-size: 5rem;
+  color: #a9a9a9;
+  filter: brightness(2);
+  font-family: "Dancing Script", sans-serif;
+}
+
+.favourites-container {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 6rem;
+}
+
+.favourite-time {
+}
+.favourite-image {
+  height: 16rem;
+  width: 12rem;
+  border-radius: 0.6rem;
+  margin-top: 1.5rem;
+}
+.favourite-title {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+.favourite-season {
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+.favourite-episode {
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+.favourite-genres {
+}
+
 .favourite-button {
   position: absolute;
   bottom: 1rem;
@@ -362,6 +403,12 @@ nav {
   filter: contrast(0);
   height: 4rem;
   width: 4rem;
+}
+
+.clear-all-favourites {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*extra*/
@@ -393,5 +440,13 @@ nav {
 
 /*Audio Player*/
 .audio-player {
-  position: absolute;
+  position: fixed;
+  bottom: 0;
+  z-index: 100000000000;
+}
+
+.playing-episode {
+  color: #6da5c0;
+  font-size: 1.2rem;
+  display: inline;
 }

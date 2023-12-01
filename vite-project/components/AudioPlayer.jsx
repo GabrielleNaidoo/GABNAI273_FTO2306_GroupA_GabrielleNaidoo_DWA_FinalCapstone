@@ -23,9 +23,10 @@ function AudioPlayer() {
   return (
     <div className="audio-player">
       {AudioCtx.currentAudioFile && (
-        <p>{`Episode ${AudioCtx.currentEpisode}: ${AudioCtx.currentEpisodeTitle}`}</p>
+        <p className="playing-episode">{`Episode ${AudioCtx.currentEpisode}: ${AudioCtx.currentEpisodeTitle}`}</p>
       )}
       <ReactAudioPlayer
+        style={{ width: "100vw", opacity: "0.75", backgroundColor: "#6da5c0" }}
         key={AudioCtx.currentEpisode}
         src={AudioCtx.currentAudioFile}
         autoPlay

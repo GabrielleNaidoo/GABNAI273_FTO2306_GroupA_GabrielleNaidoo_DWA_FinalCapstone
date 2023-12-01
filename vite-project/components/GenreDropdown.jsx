@@ -7,11 +7,17 @@ const StyledSelect = styled(Select)`
   && {
     color: #05161a;
     width: 10rem;
+    background-color: #a9a9a9;
   }
 `;
 const StyledMenuItem = styled(MenuItem)`
   && {
     color: #05161a;
+  }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 1rem;
+    }
   }
 `;
 

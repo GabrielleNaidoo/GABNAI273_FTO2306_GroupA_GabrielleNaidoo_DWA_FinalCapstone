@@ -4,6 +4,159 @@ import AudioContext from "../store/audio-context";
 import GenreDropdown from "/components/GenreDropdown";
 import SearchBox from "/components/SearchBox";
 import Dropdown from "/components/DropDown";
+import { Card, Button, Chip } from "@mui/material";
+import styled from "@emotion/styled";
+
+const StyledButton = styled(Button)`
+  && {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #05161a;
+    padding: 0.8rem 2.4rem;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    background-color: #6da5c0;
+    box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    border-radius: 1rem;
+    letter-spacing: 0.04rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0f969c;
+  }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 0.6rem;
+      padding: 0.2rem 1.2rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02rem;
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    && {
+      font-size: 0.7rem;
+      padding: 0.25rem 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+  }
+  @media screen and (min-width: 375px) and (max-width: 400px) {
+    && {
+      font-size: 0.5rem;
+      padding: 0.2rem 1rem;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 1200px) {
+    && {
+      font-size: 0.8rem;
+      padding: 0.4rem 1.2rem;
+    }
+  }
+`;
+const StyledButtonVariant = styled(Button)`
+  && {
+    font-size: 1rem;
+    font-weight: 400;
+    color:;
+    padding: 0.8rem 2.4rem;
+    margin-top: 3rem;
+    background-color: #711f22;
+    color: #a9a9a9;
+    box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -webkit-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    -moz-box-shadow: -1px 1px 8px 0px rgba(169, 169, 169, 0.75);
+    border-radius: 1rem;
+    letter-spacing: 0.04rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #0f969c;
+  }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 0.6rem;
+      padding: 0.2rem 1.2rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02rem;
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    && {
+      font-size: 0.7rem;
+      padding: 0.25rem 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+  }
+  @media screen and (min-width: 375px) and (max-width: 400px) {
+    && {
+      font-size: 0.5rem;
+
+      padding: 0.2rem 1rem;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 1200px) {
+    && {
+      font-size: 0.8rem;
+      padding: 0.4rem 1.2rem;
+    }
+  }
+`;
+
+const StyledCard = styled(Card)`
+  && {
+    position: relative;
+    color: #999999;
+    background-color: #05161a;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    box-shadow: -8px 8px 17px 0px rgba(12, 112, 117, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    height: 100%;
+  }
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      padding: 0.2rem 0.3rem;
+
+      gap: 1.5rem;
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    && {
+      gap: 1.7rem;
+    }
+  }
+`;
+
+const StyledChip = styled(Chip)`
+  && {
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.2rem 0.4rem;
+    color: #05161a;
+    background-color: #999999;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    && {
+      font-size: 1rem;
+      padding: 0.1rem 0.2rem;
+    }
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 1200px) {
+    && {
+      font-size: 1rem;
+      padding: 0.4rem 1.2rem;
+    }
+  }
+`;
 
 function Favourites() {
   // context:
@@ -144,45 +297,45 @@ function Favourites() {
     };
 
     const genreMap = show.genres.map((genre) => {
-      return (
-        <li key={genre}>
-          <div className="genre-list-item-text-container">
-            {genreTitle[genre]}
-          </div>
-        </li>
-      );
+      return <StyledChip key={genre} label={genreTitle[genre]}></StyledChip>;
     });
 
     return (
       <div key={favourite.title}>
-        <p>
-          Added: {date} {time}
-        </p>
-        <img
-          src={show.image}
-          alt="show image"
-          className="preview-cover-image"
-        ></img>
-        <div>
-          <h4>{show.title}</h4>
-          <h5>{`Season: ${favourite.seasonNumber}`}</h5>
-          <h3>{`Episode ${favourite.episode} : ${favourite.title}`}</h3>
-          <div>
-            <ul>{genreMap}</ul>
-          </div>
-
+        <StyledCard>
+          <p className="favourite-time">
+            Added: {date} {time}
+          </p>
+          <h1 className="favourite-title">{show.title}</h1>
           <img
-            className="episode-favourite-image image"
-            onClick={() => toggleFavouritesHandler(favourite)}
-            src={
-              favouritesCtx.isFavourite(favourite.title)
-                ? "/images/heart-filled.png"
-                : "/images/heart-empty.png"
-            }
-            alt="favourite image"
+            className="favourite-image image"
+            src={show.image}
+            alt="show image"
           ></img>
-          <button onClick={() => handleClick(favourite)}>Listen</button>
-        </div>
+          <div className="favourite-genres">
+            <div>{genreMap}</div>
+          </div>
+          <div>
+            <p className="favourite-season">{`Season: ${favourite.seasonNumber}`}</p>
+            <p className="favourite-episode">{`Episode ${favourite.episode} : ${favourite.title}`}</p>
+
+            <div className="favourite-button">
+              <img
+                className="episode-favourite-image"
+                onClick={() => toggleFavouritesHandler(favourite)}
+                src={
+                  favouritesCtx.isFavourite(favourite.title)
+                    ? "/images/heart-filled.png"
+                    : "/images/heart-empty.png"
+                }
+                alt="favourite image"
+              ></img>
+            </div>
+            <StyledButton onClick={() => handleClick(favourite)}>
+              Listen
+            </StyledButton>
+          </div>
+        </StyledCard>
       </div>
     );
   });
@@ -202,12 +355,16 @@ function Favourites() {
           <Dropdown data={formData} changeHandler={handleChange} />
         </div>
       </div>
-      <div>
-        <h1>Your favourites</h1>
-        <button onClick={favouritesCtx.clearFavourites}>Clear All</button>
-      </div>
 
-      <div>{favouriteItems}</div>
+      <div>
+        <h1 className="favourite-page-title">Your favourites</h1>
+      </div>
+      <div className="clear-all-favourites">
+        <StyledButtonVariant onClick={favouritesCtx.clearFavourites}>
+          Clear All Favourites
+        </StyledButtonVariant>
+      </div>
+      <div className="favourites-container">{favouriteItems}</div>
     </div>
   );
 }
