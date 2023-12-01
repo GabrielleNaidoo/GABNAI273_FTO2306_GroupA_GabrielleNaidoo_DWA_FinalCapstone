@@ -142,7 +142,7 @@ function Episodes(props) {
               src={
                 favouritesCtx.isFavourite(episode.title)
                   ? "/images/heart-filled.png"
-                  : "/images/heart-empty.png"
+                  : " /images/heart-empty.png"
               }
               alt="favourite image"
             ></img>
@@ -155,7 +155,7 @@ function Episodes(props) {
     <div>
       <StyledButton onClick={handleClickBack}>
         <svg
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="https://vermillion-khapse-57703d.netlify.app/http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
