@@ -421,9 +421,9 @@ nav {
   opacity: 0.5;
 
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 4rem;
   right: 1.5rem;
-  z-index: 100;
+  z-index: 1000000;
 }
 
 .back-to-top {

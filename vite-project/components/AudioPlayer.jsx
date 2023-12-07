@@ -44,21 +44,3 @@ function AudioPlayer() {
 
 export default AudioPlayer;
 
-// const isAudioPlaying = Boolean(AudioCtx.currentAudioFile);
-
-// useEffect(() => {
-//   const handleBeforeUnload = (event) => {
-//     if (isAudioPlaying) {
-//       const message =
-//         "Are you sure you want to leave? Your audio is still playing.";
-//       event.returnValue = message; // Standard for most browsers
-//       return message; // For some older browsers
-//     }
-//   };
-
-//   window.addEventListener("beforeunload", handleBeforeUnload);
-
-//   return () => {
-//     window.removeEventListener("beforeunload", handleBeforeUnload);
-//   };
-// }, [isAudioPlaying]);
