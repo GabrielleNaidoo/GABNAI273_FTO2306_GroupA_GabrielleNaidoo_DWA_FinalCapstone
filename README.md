@@ -1,4 +1,4 @@
-# GABNAI273_FTO2306_GroupA_GabrielleNaidoo_DWA_Capstone
+# PodPortal
 📚 PodPortal- A Web App using data fetching from a Public API
 
 Project Description: A Web App that allows users to sign in to their accounts, browse a vast list of podcasts, add episodes to their favourites list, and listen to podcasts while browsing.
